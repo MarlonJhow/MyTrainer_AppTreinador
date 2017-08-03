@@ -1,4 +1,4 @@
-package tcc.mytrainer.fragment;
+package tcc.mytrainer.fragment.mensagens;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,14 +13,14 @@ import tcc.mytrainer.R;
  * Created by Marlon on 28/07/2017.
  */
 
-public class TreinosFragment extends Fragment {
+public class MensagensFragment extends Fragment {
 
     View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_treinos, container, false);
+        view = inflater.inflate(R.layout.fragment_mensagens, container, false);
         return view;
     }
 }

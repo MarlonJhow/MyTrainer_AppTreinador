@@ -13,10 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import tcc.mytrainer.fragment.TreinosFragment;
-import tcc.mytrainer.fragment.InicioFragment;
-import tcc.mytrainer.fragment.AlunosFragment;
-import tcc.mytrainer.fragment.MensagensFragment;
+import tcc.mytrainer.fragment.treinos.TreinosFragment;
+import tcc.mytrainer.fragment.inicio.InicioFragment;
+import tcc.mytrainer.fragment.alunos.AlunosFragment;
+import tcc.mytrainer.fragment.mensagens.MensagensFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
