@@ -8,9 +8,8 @@ import java.util.List;
 
 public class Treino {
     private Long id;
-    private String treino;
+    private String nome;
     private String descricao;
-    List<Atividade> atividades;
 
     public Treino() {
     }
@@ -23,12 +22,12 @@ public class Treino {
         this.id = id;
     }
 
-    public String getTreino() {
-        return treino;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTreino(String treino) {
-        this.treino = treino;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -39,11 +38,4 @@ public class Treino {
         this.descricao = descricao;
     }
 
-    public List<Atividade> getAtividades() {
-        return atividades;
-    }
-
-    public void setAtividades(List<Atividade> atividades) {
-        this.atividades = atividades;
-    }
 }

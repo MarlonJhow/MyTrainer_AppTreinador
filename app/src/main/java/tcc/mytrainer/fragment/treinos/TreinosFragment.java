@@ -3,17 +3,19 @@ package tcc.mytrainer.fragment.treinos;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.model.Treino;
+import tcc.mytrainer.web.WebCliente;
 
 /**
  * Created by Marlon on 28/07/2017.
@@ -32,7 +34,12 @@ public class TreinosFragment extends Fragment {
         treinos = getTreinos();
         rvView = (RecyclerView) getView().findViewById(R.id.rv_treinos);
 
-        rvView.setAdapter(new TreinoAdapter(treinos));
+        rvView.setAdapter(new TreinoAdapter(treinos, getActivity()));
+
+        RecyclerView.LayoutManager layout = new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.VERTICAL, false);
+
+        rvView.setLayoutManager(layout);
     }
 
     @Nullable
@@ -40,5 +47,15 @@ public class TreinosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_treinos, container, false);
         return view;
+    }
+
+    public List<Treino> getTreinos() {
+        try {
+            WebCliente web = new WebCliente();
+            String response = web.get("treino");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<Treino>();
     }
 }
