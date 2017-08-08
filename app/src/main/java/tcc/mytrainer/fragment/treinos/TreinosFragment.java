@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.model.Treino;
@@ -52,8 +53,10 @@ public class TreinosFragment extends Fragment {
     public List<Treino> getTreinos() {
         try {
             WebCliente web = new WebCliente();
-            String response = web.get("treino");
-        } catch (IOException e) {
+            String response = web.execute(new String[] {"treino"}).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
         return new ArrayList<Treino>();
