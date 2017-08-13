@@ -1,5 +1,10 @@
 package tcc.mytrainer.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +17,21 @@ public class Treino {
     private String descricao;
 
     public Treino() {
+    }
+
+    public Treino(JSONObject jsonObject) throws JSONException {
+        this.id = Long.parseLong(jsonObject.get("id").toString());
+        this.nome = jsonObject.get("nome").toString();
+        this.descricao = jsonObject.get("descricao").toString();
+    }
+
+    public static List<Treino> toList(JSONArray jsonArray) throws JSONException {
+        List<Treino> treinos = new ArrayList<>();
+        for (int index = 0; index < jsonArray.length(); index++) {
+            JSONObject jsonObject = (JSONObject) jsonArray.get(index);
+            treinos.add(new Treino(jsonObject));
+        }
+        return treinos;
     }
 
     public Long getId() {
