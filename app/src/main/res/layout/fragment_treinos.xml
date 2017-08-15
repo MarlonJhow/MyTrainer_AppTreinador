@@ -11,15 +11,15 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         app:cardBackgroundColor="@color/cardview_light_background"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="4dp"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,46 +28,53 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="169dp">
+                android:layout_height="121dp">
 
                 <ImageView
                     android:id="@+id/imageView3"
                     android:layout_width="match_parent"
-                    android:layout_height="144dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentTop="true"
+                    android:layout_height="120dp"
                     android:adjustViewBounds="false"
                     android:cropToPadding="false"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/card_treinos" />
+                    app:srcCompat="@drawable/card_treinos"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
                     android:layout_weight="1"
                     android:background="@android:drawable/screen_background_dark_transparent"
                     android:padding="5dp"
-                    android:text="Treinos"
+                    android:text="Cadastro de Treinos"
                     android:textColor="@android:color/background_light"
-                    android:textSize="36sp" />
+                    android:textSize="30sp"
+                    android:layout_alignBottom="@+id/imageView3"
+                    android:layout_alignParentStart="true" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="51dp">
 
-                <Button
-                    android:id="@+id/button3"
-                    style="@style/Widget.AppCompat.Button.Borderless"
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButton3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:text="Adicionar" />
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_marginEnd="14dp"
+                    android:clickable="true"
+                    app:backgroundTint="@color/empty"
+                    app:elevation="0dp"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_add_black"
+                    tools:backgroundTint="?android:attr/selectableItemBackgroundBorderless" />
+
             </RelativeLayout>
 
         </LinearLayout>
@@ -78,10 +85,13 @@
         android:id="@+id/rv_treinos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignStart="@+id/cardView"
         android:scrollbars="vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/cardView"
-        android:layout_alignEnd="@+id/cardView" />
+        android:layout_alignParentBottom="true" />
 
 
 </android.widget.RelativeLayout>
