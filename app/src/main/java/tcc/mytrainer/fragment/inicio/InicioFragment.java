@@ -20,7 +20,7 @@ public class InicioFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_inicio, container, false);
+        view = inflater.inflate(R.layout.inicio_fragment, container, false);
         return view;
     }
 }

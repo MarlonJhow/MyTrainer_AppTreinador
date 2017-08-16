@@ -11,15 +11,9 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
         app:cardBackgroundColor="@color/cardview_light_background"
-        >
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,31 +22,32 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="121dp">
+                android:layout_height="87dp">
 
                 <ImageView
                     android:id="@+id/imageView3"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:adjustViewBounds="false"
                     android:cropToPadding="false"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/card_treinos"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentBottom="true" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
                     android:layout_weight="1"
                     android:background="@android:drawable/screen_background_dark_transparent"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:text="Cadastro de Treinos"
                     android:textColor="@android:color/background_light"
-                    android:textSize="30sp"
-                    android:layout_alignBottom="@+id/imageView3"
-                    android:layout_alignParentStart="true" />
+                    android:textSize="20sp" />
 
             </RelativeLayout>
 
@@ -85,13 +80,14 @@
         android:id="@+id/rv_treinos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/cardView"
-        android:layout_alignParentBottom="true" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:scrollbars="vertical" />
 
 
 </android.widget.RelativeLayout>

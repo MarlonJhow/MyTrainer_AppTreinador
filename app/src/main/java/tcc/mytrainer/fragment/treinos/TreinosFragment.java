@@ -9,17 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -46,7 +38,7 @@ public class TreinosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //CREATE VIEW
-        view = inflater.inflate(R.layout.fragment_treinos, container, false);
+        view = inflater.inflate(R.layout.treino_fragment, container, false);
 
         //GET TREINOS
         treinos = getTreinos();

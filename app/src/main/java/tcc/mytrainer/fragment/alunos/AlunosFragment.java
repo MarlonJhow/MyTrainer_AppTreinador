@@ -20,7 +20,7 @@ public class AlunosFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_alunos, container, false);
+        view = inflater.inflate(R.layout.aluno_fragment, container, false);
         return view;
     }
 }
