@@ -28,7 +28,7 @@ class TreinoAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.item_treino, parent, false);
+                .inflate(R.layout.treino_item, parent, false);
         TreinoHolder holder = new TreinoHolder(view);
         return holder;
     }

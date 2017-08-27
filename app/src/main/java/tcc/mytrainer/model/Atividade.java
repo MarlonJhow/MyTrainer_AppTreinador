@@ -5,19 +5,12 @@ package tcc.mytrainer.model;
  */
 
 class Atividade {
-    private Long id;
     private String nome;
     private String descricao;
+    private Integer repeticoes;
+    private Integer series;
 
     public Atividade() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -34,5 +27,21 @@ class Atividade {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Integer getRepeticoes() {
+        return repeticoes;
+    }
+
+    public void setRepeticoes(Integer repeticoes) {
+        this.repeticoes = repeticoes;
+    }
+
+    public Integer getSeries() {
+        return series;
+    }
+
+    public void setSeries(Integer series) {
+        this.series = series;
     }
 }

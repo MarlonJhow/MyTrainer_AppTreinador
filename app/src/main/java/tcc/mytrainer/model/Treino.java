@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,6 +16,8 @@ public class Treino {
     private Long id;
     private String nome;
     private String descricao;
+    private HashMap<String, Atividade> atividades;
+    private HashMap<String, String> alunos;
 
     public Treino() {
     }
@@ -58,4 +61,19 @@ public class Treino {
         this.descricao = descricao;
     }
 
+    public HashMap<String, String> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(HashMap<String, String> alunos) {
+        this.alunos = alunos;
+    }
+
+    public HashMap<String, Atividade> getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(HashMap<String, Atividade> atividades) {
+        this.atividades = atividades;
+    }
 }

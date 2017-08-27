@@ -1,8 +1,11 @@
 package tcc.mytrainer;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +16,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import tcc.mytrainer.activity.LoginActivity;
 import tcc.mytrainer.fragment.treinos.TreinosFragment;
 import tcc.mytrainer.fragment.inicio.InicioFragment;
 import tcc.mytrainer.fragment.alunos.AlunosFragment;
@@ -20,6 +28,9 @@ import tcc.mytrainer.fragment.mensagens.MensagensFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +58,16 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
+
+        //VALIDA USER LOGIN
+        FirebaseApp.initializeApp(this);
+        mAuth = FirebaseAuth.getInstance();
+        //mAuth.signOut();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user == null){
+            startActivity(new Intent(this, LoginActivity.class)) ;
+        }
+
     }
 
     @Override

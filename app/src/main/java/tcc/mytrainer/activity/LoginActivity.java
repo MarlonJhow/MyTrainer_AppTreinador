@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,11 +29,21 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import tcc.mytrainer.R;
+import tcc.mytrainer.model.Treinador;
+import tcc.mytrainer.util.StringUtil;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -63,6 +74,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    //FIREBASE AUTH
+    private static final String TAG = "EmailPassword";
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
+    //FIREBASE DATABASE
+    private DatabaseReference mDatabase;
 
 
     @Override
@@ -96,6 +115,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
+        //FIREBASE AUTH
+        mAuth = FirebaseAuth.getInstance();
+
+        //FIREBASE DATABASE
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     private void populateAutoComplete() {
@@ -157,8 +181,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        final String email = mEmailView.getText().toString();
+        final String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -189,9 +213,41 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+//            mAuthTask = new UserLoginTask(email, password);
+//            mAuthTask.execute((Void) null);
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                            if (!task.isSuccessful()) {
+                                createUser(email, password);
+                            } else {
+                                showProgress(false);
+                                finish();
+                            }
+                        }
+                    });
+
         }
+
+    }
+
+    private void createUser(final String email, final String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        Treinador newTreinador = new Treinador(email, password);
+                        String id = StringUtil.formatEmailToKey(email);
+                        mDatabase.child("Treinador").child(id).setValue(newTreinador);
+                        showProgress(false);
+                        finish();
+                    }
+                });
     }
 
     private boolean isEmailValid(String email) {

@@ -5,22 +5,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="tcc.mytrainer.fragment.treinos.TreinoCadastro">
+    tools:context="tcc.mytrainer.fragment.treinos.cadastro.CadastroTreino">
 
-    <EditText
-        android:id="@+id/editText2"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_alignBottom="@+id/textView2"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/card_treinos" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/screen_background_dark_transparent"
+                    android:padding="10dp"
+                    android:text="Cadastro de Treinos"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Titulo" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:text="Descrição" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Titulo" />
+        android:layout_marginTop="5dp">
 
-    <EditText
-        android:id="@+id/editText"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/buttonAddAtividade"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adicionar Atividade"
+                android:textColorLink="@color/cardview_shadow_start_color" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="279dp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:text="Descrição" />
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:text="SALVAR" />
+    </RelativeLayout>
 
 </LinearLayout>

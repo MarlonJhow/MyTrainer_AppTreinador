@@ -29,7 +29,7 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".fragment.treinos.TreinoCadastro"></activity>
+        <activity android:name=".fragment.treinos.cadastro.CadastroTreino"></activity>
     </application>
 
 </manifest>
