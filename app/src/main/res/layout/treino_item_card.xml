@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/item_treino_nome"
+                android:id="@+id/item_atividade_nome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/item_treino_nome"
+                android:layout_below="@+id/item_atividade_nome"
                 android:padding="5dp"
                 android:text="N atividades:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
@@ -39,7 +39,7 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/item_treino_nome"
+                android:layout_below="@+id/item_atividade_nome"
                 android:layout_toEndOf="@+id/textView6"
                 android:padding="5dp"
                 android:text="N alunos:"

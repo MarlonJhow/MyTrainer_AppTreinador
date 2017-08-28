@@ -17,7 +17,7 @@ public class TreinoHolder extends RecyclerView.ViewHolder {
 
     public TreinoHolder(View itemView) {
         super(itemView);
-        nome = (TextView) itemView.findViewById(R.id.item_treino_nome);
+        nome = (TextView) itemView.findViewById(R.id.item_atividade_nome);
     }
 
     public TextView getNome() {

@@ -16,8 +16,8 @@ public class Treino {
     private Long id;
     private String nome;
     private String descricao;
-    private HashMap<String, Atividade> atividades;
-    private HashMap<String, String> alunos;
+    private HashMap<String, Atividade> atividades = new HashMap<>();
+    private HashMap<String, String> alunos= new HashMap<>();
 
     public Treino() {
     }

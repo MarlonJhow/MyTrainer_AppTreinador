@@ -48,20 +48,20 @@
             </RelativeLayout>
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/nomeTreino"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Titulo" />
+                android:hint="Nome Treino"
+                android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/descricaoTreino"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textMultiLine"
-                android:text="Descrição" />
+                android:hint="Descrição Treino"
+                android:inputType="textMultiLine" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -76,17 +76,68 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/buttonAddAtividade"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Adicionar Atividade"
-                android:textColorLink="@color/cardview_shadow_start_color" />
-
-            <ListView
+            <EditText
+                android:id="@+id/nomeAtividade"
                 android:layout_width="match_parent"
-                android:layout_height="279dp" />
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Nome Atividade"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/descricaoAtividade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Descrição Atividade"
+                android:inputType="textMultiLine" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/nRepeticoes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Nº Repetições"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/nSeries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Nº Series"
+                    android:inputType="number" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/buttonAddAtividade"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adicionar Atividade"
+                    android:textAlignment="center"
+                    android:textColorLink="@color/cardview_shadow_start_color"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvAtividades"
+                android:layout_width="match_parent"
+                android:layout_height="153dp" />
 
         </LinearLayout>
 

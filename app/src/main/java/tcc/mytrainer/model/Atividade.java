@@ -1,16 +1,32 @@
 package tcc.mytrainer.model;
 
+import android.text.Editable;
+
 /**
  * Created by Marlon on 03/08/2017.
  */
 
-class Atividade {
+public class Atividade {
     private String nome;
     private String descricao;
     private Integer repeticoes;
     private Integer series;
 
     public Atividade() {
+    }
+
+    public Atividade(String nome, String descricao, String repeticoes, String series) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.repeticoes = Integer.parseInt(repeticoes);
+        this.series = Integer.parseInt(series);
+    }
+
+    public Atividade(String nome, String descricao, int repeticoes, int series) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.repeticoes = repeticoes;
+        this.series = series;
     }
 
     public String getNome() {
