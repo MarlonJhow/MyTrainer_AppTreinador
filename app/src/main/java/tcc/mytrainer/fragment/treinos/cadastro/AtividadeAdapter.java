@@ -33,7 +33,7 @@ public class AtividadeAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.atividade_item_card, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.treino_atividade_item_card, parent, false);
         AtividadeHolder holder = new AtividadeHolder(view);
         return holder;
     }
