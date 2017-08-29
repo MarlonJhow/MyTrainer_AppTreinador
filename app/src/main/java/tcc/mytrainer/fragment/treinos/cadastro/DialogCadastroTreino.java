@@ -15,6 +15,11 @@ import tcc.mytrainer.R;
 
 public class DialogCadastroTreino extends DialogFragment {
 
+    CadastroTreinoDialogListener mListener;
+
+    public interface CadastroTreinoDialogListener {
+        public void onDialogPositiveClick(DialogFragment dialog);
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -29,7 +34,7 @@ public class DialogCadastroTreino extends DialogFragment {
                 .setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-
+                        mListener.onDialogPositiveClick(DialogCadastroTreino.this);
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -38,6 +43,20 @@ public class DialogCadastroTreino extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Verify that the host activity implements the callback interface
+        try {
+            // Instantiate the NoticeDialogListener so we can send events to the host
+            mListener = (CadastroTreinoDialogListener) activity;
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface, throw exception
+            throw new ClassCastException(activity.toString()
+                    + " must implement NoticeDialogListener");
+        }
     }
 
 }
