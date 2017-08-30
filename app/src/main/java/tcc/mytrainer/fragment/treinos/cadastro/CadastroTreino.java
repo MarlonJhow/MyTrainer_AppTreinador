@@ -36,6 +36,7 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private Treino treino;
     private Context context;
+    private AtividadeAdapter atividadeAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,17 +48,15 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
         treino = new Treino();
 
         //CREATE RecyclerVIew
-        Atividade atividade = new Atividade("nome", "descricao", 5, 5);
-        treino.getAtividades().put(atividade.getNome(), atividade);
         rvAtividades = (RecyclerView) findViewById(R.id.rvAtividades);
-        final AtividadeAdapter atividadeAdapter = new AtividadeAdapter(treino.getAtividades(), this);
+        atividadeAdapter = new AtividadeAdapter(treino.getAtividades(), this);
         rvAtividades.setAdapter(atividadeAdapter);
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
         rvAtividades.setLayoutManager(layout);
 
 
-        //SHOW DIALOG ADD ATIVIDADE
+        //BUTTON SHOW DIALOG ADD ATIVIDADE
         Button buttonAddAtividade = (Button) findViewById(R.id.buttonAddAtividade);
         buttonAddAtividade.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,33 +65,38 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
                 dialogAddAtividade.show(getSupportFragmentManager(), "dialogAddAtividade");
             }
         });
-//        buttonAddAtividade.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                EditText nomeAtividade = (EditText) findViewById(R.id.nomeAtividade);
-//                EditText descricaoAtividade = (EditText) findViewById(R.id.descricaoAtividade);
-//                EditText nRepeticoes = (EditText) findViewById(R.id.nRepeticoes);
-//                EditText nSeries = (EditText) findViewById(R.id.nSeries);
-//
-//                if(treino.getAtividades().get(nomeAtividade) == null){
-//                    Atividade atividade = new Atividade(nomeAtividade.getText().toString(), descricaoAtividade.getText().toString(), nRepeticoes.getText().toString(), nSeries.getText().toString());
-//                    treino.getAtividades().put(atividade.getNome(), atividade);
-//                    atividadeAdapter.updateAtividadaes(treino.getAtividades());
-//                    atividadeAdapter.notifyDataSetChanged();
-//                } else {
-//                    //TODO TOAST MESSAGE NOME REPETIDO
-//                }
-//
-//            }
-//        });
 
+        //BUTTON SALVAR
+        Button buttonSalvar = (Button) findViewById(R.id.buttonCadastroTreinoSalvar);
+        buttonSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO SALVAR
+            }
+        });
+
+        //BUTTON CANCELAR
+        Button buttonCancelar = (Button) findViewById(R.id.buttonCadastroTreinoCancelar);
+        buttonCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        // User touched the dialog's positive button
-        ...
+    public void onDialogPositiveClick(DialogCadastroTreino dialog) {
+
+        if (treino.getAtividades().get(dialog.atividadeNome.getText().toString()) == null) {
+            Atividade atividade = new Atividade(dialog.atividadeNome.getText().toString(), dialog.atividadeDescricao.getText().toString(), dialog.atividadeRepeticoes.getText().toString(), dialog.atividadeSeries.getText().toString());
+            treino.getAtividades().put(atividade.getNome(), atividade);
+            atividadeAdapter.updateAtividadaes(treino.getAtividades());
+            atividadeAdapter.notifyDataSetChanged();
+        } else {
+            //TODO TOAST MESSAGE NOME REPETIDO
+        }
     }
 
 }

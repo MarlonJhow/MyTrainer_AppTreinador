@@ -1,11 +1,13 @@
 package tcc.mytrainer.fragment.treinos.cadastro;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.widget.EditText;
 
 import tcc.mytrainer.R;
 
@@ -18,15 +20,19 @@ public class DialogCadastroTreino extends DialogFragment {
     CadastroTreinoDialogListener mListener;
 
     public interface CadastroTreinoDialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog);
+        public void onDialogPositiveClick(DialogCadastroTreino dialog);
     }
 
+    public EditText atividadeNome;
+    public EditText atividadeDescricao;
+    public EditText atividadeRepeticoes;
+    public EditText atividadeSeries;
+
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.treino_dialog_cadastro, null))
@@ -34,6 +40,12 @@ public class DialogCadastroTreino extends DialogFragment {
                 .setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+
+                        atividadeNome = (EditText) getDialog().findViewById(R.id.atividadeNome);
+                        atividadeDescricao = (EditText) getDialog().findViewById(R.id.atividadeDescricao);
+                        atividadeRepeticoes = (EditText) getDialog().findViewById(R.id.atividadeRepeticoes);
+                        atividadeSeries = (EditText) getDialog().findViewById(R.id.atividadeSeries);
+
                         mListener.onDialogPositiveClick(DialogCadastroTreino.this);
                     }
                 })
