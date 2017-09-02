@@ -23,7 +23,7 @@
                 android:layout_alignParentTop="true"
                 android:padding="5dp"
                 android:text="nomeTreino"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
             <TextView
                 android:id="@+id/textView6"
