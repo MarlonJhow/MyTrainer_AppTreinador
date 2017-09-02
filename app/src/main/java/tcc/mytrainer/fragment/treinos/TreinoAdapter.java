@@ -1,6 +1,7 @@
 package tcc.mytrainer.fragment.treinos;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,16 @@ class TreinoAdapter extends RecyclerView.Adapter {
 
     List<Treino> treinos;
     private Context context;
+    private OnItemClickListener mOnItemClickListener;
 
-    public TreinoAdapter(List<Treino> treinos, Context context) {
+    public interface OnItemClickListener{
+        void onItemClick(View view, int position);
+    }
+
+    public TreinoAdapter(List<Treino> treinos, Context context, OnItemClickListener mOnItemClickListener) {
         this.treinos = treinos;
         this.context = context;
+        this.mOnItemClickListener= mOnItemClickListener;
     }
 
     @Override
@@ -32,16 +39,26 @@ class TreinoAdapter extends RecyclerView.Adapter {
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.treino_item_card, parent, false);
         TreinoHolder holder = new TreinoHolder(view);
+
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         TreinoHolder treinoHolder = (TreinoHolder) holder;
         Treino treino = treinos.get(position);
         treinoHolder.getNome().setText(treino.getNome());
         treinoHolder.getnAtividades().setText(Integer.toString(treino.getAtividades().size()));
         treinoHolder.getnAlunos().setText(Integer.toString(treino.getAlunos().size()));
+
+        ((TreinoHolder) holder).getButtonEdit().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnItemClickListener.onItemClick(v, position);
+            }
+        });
+
+
     }
 
     @Override

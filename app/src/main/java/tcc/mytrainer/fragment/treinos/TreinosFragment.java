@@ -34,7 +34,7 @@ import tcc.mytrainer.web.WebCliente;
  * Created by Marlon on 28/07/2017.
  */
 
-public class TreinosFragment extends Fragment {
+public class TreinosFragment extends Fragment implements TreinoAdapter.OnItemClickListener{
 
     View view;
     RecyclerView rvView;
@@ -62,7 +62,7 @@ public class TreinosFragment extends Fragment {
         //INIT Recycler View
 
         rvView = (RecyclerView) view.findViewById(R.id.rv_treinos);
-        treinoAdapter = new TreinoAdapter(new ArrayList<Treino>(Session.treinador.getTreinos().values()), getActivity());
+        treinoAdapter = new TreinoAdapter(new ArrayList<Treino>(Session.treinador.getTreinos().values()), getActivity(), this);
         rvView.setAdapter(treinoAdapter);
         RecyclerView.LayoutManager layout = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
@@ -83,4 +83,8 @@ public class TreinosFragment extends Fragment {
         super.onResume();
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        System.out.println("entrou");
+    }
 }
