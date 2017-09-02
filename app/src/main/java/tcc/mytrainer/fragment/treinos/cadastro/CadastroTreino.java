@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tcc.mytrainer.R;
+import tcc.mytrainer.database.Session;
+import tcc.mytrainer.facade.TreinoFacade;
 import tcc.mytrainer.model.Atividade;
 import tcc.mytrainer.model.Treinador;
 import tcc.mytrainer.model.Treino;
@@ -33,7 +35,6 @@ import tcc.mytrainer.util.StringUtil;
 public class CadastroTreino extends AppCompatActivity implements DialogCadastroTreino.CadastroTreinoDialogListener {
 
     private RecyclerView rvAtividades;
-    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private Treino treino;
     private Context context;
     private AtividadeAdapter atividadeAdapter;
@@ -71,7 +72,14 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
         buttonSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO SALVAR
+                String nome = ((EditText) findViewById(R.id.treinoNome)).getText().toString();
+                String descricao = ((EditText) findViewById(R.id.treinoDescricao)).getText().toString();
+
+                treino.setNome(nome);
+                treino.setDescricao(descricao);
+
+                TreinoFacade.salvarTreino(treino);
+                finish();
             }
         });
 
@@ -91,7 +99,8 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
 
         if (treino.getAtividades().get(dialog.atividadeNome.getText().toString()) == null) {
             Atividade atividade = new Atividade(dialog.atividadeNome.getText().toString(), dialog.atividadeDescricao.getText().toString(), dialog.atividadeRepeticoes.getText().toString(), dialog.atividadeSeries.getText().toString());
-            treino.getAtividades().put(atividade.getNome(), atividade);
+            atividade.setId(Session.getId());
+            treino.getAtividades().put(atividade.getId(), atividade);
             atividadeAdapter.updateAtividadaes(treino.getAtividades());
             atividadeAdapter.notifyDataSetChanged();
         } else {

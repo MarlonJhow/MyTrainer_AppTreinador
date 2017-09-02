@@ -29,7 +29,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -42,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tcc.mytrainer.R;
+import tcc.mytrainer.database.Session;
 import tcc.mytrainer.model.Treinador;
 import tcc.mytrainer.util.StringUtil;
 
@@ -77,12 +77,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     //FIREBASE AUTH
     private static final String TAG = "EmailPassword";
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-
-    //FIREBASE DATABASE
-    private DatabaseReference mDatabase;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,11 +109,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        //FIREBASE AUTH
-        mAuth = FirebaseAuth.getInstance();
-
-        //FIREBASE DATABASE
-        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     private void populateAutoComplete() {
@@ -215,7 +204,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
 //            mAuthTask = new UserLoginTask(email, password);
 //            mAuthTask.execute((Void) null);
-            mAuth.signInWithEmailAndPassword(email, password)
+            Session.mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -224,7 +213,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             if (!task.isSuccessful()) {
                                 createUser(email, password);
                             } else {
-                                showProgress(false);
                                 finish();
                             }
                         }
@@ -234,18 +222,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
+    private void finishLogin(){
+        Session.initEntitys();
+        showProgress(false);
+        finish();
+    }
+
     private void createUser(final String email, final String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
+        Session.mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
                         Treinador newTreinador = new Treinador(email, password);
-                        String id = StringUtil.formatEmailToKey(email);
-                        mDatabase.child("Treinador").child(id).setValue(newTreinador);
-                        showProgress(false);
-                        finish();
+                        String id = StringUtil.formatEmailToId(email);
+                        newTreinador.setId(id);
+                        Session.mDatabase.child("Treinador").child(id).setValue(newTreinador);
+                        finishLogin();
                     }
                 });
     }

@@ -13,11 +13,15 @@ import tcc.mytrainer.R;
 public class TreinoHolder extends RecyclerView.ViewHolder {
 
     private TextView nome;
-    private TextView descricao;
+    private TextView nAtividades;
+    private TextView nAlunos;
 
     public TreinoHolder(View itemView) {
         super(itemView);
         nome = (TextView) itemView.findViewById(R.id.item_atividade_nome);
+        nAtividades = (TextView) itemView.findViewById(R.id.nAtividades);
+        nAlunos = (TextView) itemView.findViewById(R.id.nAlunos);
+
     }
 
     public TextView getNome() {
@@ -28,11 +32,19 @@ public class TreinoHolder extends RecyclerView.ViewHolder {
         this.nome = nome;
     }
 
-    public TextView getDescricao() {
-        return descricao;
+    public TextView getnAtividades() {
+        return nAtividades;
     }
 
-    public void setDescricao(TextView descricao) {
-        this.descricao = descricao;
+    public void setnAtividades(TextView nAtividades) {
+        this.nAtividades = nAtividades;
+    }
+
+    public TextView getnAlunos() {
+        return nAlunos;
+    }
+
+    public void setnAlunos(TextView nAlunos) {
+        this.nAlunos = nAlunos;
     }
 }

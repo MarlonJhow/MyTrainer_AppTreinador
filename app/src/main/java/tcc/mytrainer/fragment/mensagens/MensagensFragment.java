@@ -21,6 +21,7 @@ public class MensagensFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.menssagem_fragment, container, false);
+        System.out.println("dadsad");
         return view;
     }
 }

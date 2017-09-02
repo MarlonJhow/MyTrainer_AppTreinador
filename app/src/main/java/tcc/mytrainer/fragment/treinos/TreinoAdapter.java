@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tcc.mytrainer.R;
+import tcc.mytrainer.database.Session;
 import tcc.mytrainer.model.Treino;
 
 /**
@@ -38,10 +40,16 @@ class TreinoAdapter extends RecyclerView.Adapter {
         TreinoHolder treinoHolder = (TreinoHolder) holder;
         Treino treino = treinos.get(position);
         treinoHolder.getNome().setText(treino.getNome());
+        treinoHolder.getnAtividades().setText(Integer.toString(treino.getAtividades().size()));
+        treinoHolder.getnAlunos().setText(Integer.toString(treino.getAlunos().size()));
     }
 
     @Override
     public int getItemCount() {
         return treinos.size();
+    }
+
+    public void update() {
+        treinos = new ArrayList<Treino>(Session.treinador.getTreinos().values());
     }
 }

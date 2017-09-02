@@ -6,7 +6,7 @@ package tcc.mytrainer.util;
 
 public class StringUtil {
 
-    public static String formatEmailToKey(String email){
+    public static String formatEmailToId(String email){
         email = email.replaceAll("\\W|\\d", "");
         email = email.toLowerCase();
         return email;

@@ -7,6 +7,7 @@ import android.text.Editable;
  */
 
 public class Atividade {
+    private String id;
     private String nome;
     private String descricao;
     private Integer repeticoes;
@@ -59,5 +60,13 @@ public class Atividade {
 
     public void setSeries(Integer series) {
         this.series = series;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -21,19 +21,30 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import tcc.mytrainer.activity.LoginActivity;
+import tcc.mytrainer.database.Session;
+import tcc.mytrainer.facade.TreinoFacade;
 import tcc.mytrainer.fragment.treinos.TreinosFragment;
 import tcc.mytrainer.fragment.inicio.InicioFragment;
 import tcc.mytrainer.fragment.alunos.AlunosFragment;
 import tcc.mytrainer.fragment.mensagens.MensagensFragment;
+import tcc.mytrainer.model.Treinador;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //INIT FIREBASE
+        FirebaseApp.initializeApp(this);
+        //mAuth.signOut();
+        FirebaseUser user = Session.mAuth.getCurrentUser();
+        if(user == null){
+            startActivity(new Intent(this, LoginActivity.class)) ;
+        } else {
+            Session.initEntitys();
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -59,14 +70,6 @@ public class MainActivity extends AppCompatActivity
 
         getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
 
-        //VALIDA USER LOGIN
-        FirebaseApp.initializeApp(this);
-        mAuth = FirebaseAuth.getInstance();
-        //mAuth.signOut();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user == null){
-            startActivity(new Intent(this, LoginActivity.class)) ;
-        }
 
     }
 

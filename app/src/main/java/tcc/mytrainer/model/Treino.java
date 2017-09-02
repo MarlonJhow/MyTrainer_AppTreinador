@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 public class Treino {
-    private Long id;
+    private String id;
     private String nome;
     private String descricao;
     private HashMap<String, Atividade> atividades = new HashMap<>();
@@ -22,26 +22,11 @@ public class Treino {
     public Treino() {
     }
 
-    public Treino(JSONObject jsonObject) throws JSONException {
-        this.id = Long.parseLong(jsonObject.get("id").toString());
-        this.nome = jsonObject.get("nome").toString();
-        this.descricao = jsonObject.get("descricao").toString();
-    }
-
-    public static List<Treino> toList(JSONArray jsonArray) throws JSONException {
-        List<Treino> treinos = new ArrayList<>();
-        for (int index = 0; index < jsonArray.length(); index++) {
-            JSONObject jsonObject = (JSONObject) jsonArray.get(index);
-            treinos.add(new Treino(jsonObject));
-        }
-        return treinos;
-    }
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

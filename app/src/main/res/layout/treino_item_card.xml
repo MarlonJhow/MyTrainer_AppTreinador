@@ -26,23 +26,43 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/nAlunos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/item_atividade_nome"
+                android:layout_alignBaseline="@+id/textView7"
+                android:layout_alignBottom="@+id/textView7"
+                android:layout_toEndOf="@+id/textView7"
                 android:padding="5dp"
-                android:text="N atividades:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/nAtividades"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/item_atividade_nome"
-                android:layout_toEndOf="@+id/textView6"
+                android:layout_toEndOf="@+id/textView8"
                 android:padding="5dp"
-                android:text="N alunos:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/nAtividades"
+                android:layout_toEndOf="@+id/nAtividades"
+                android:padding="5dp"
+                android:text="Alunos: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView3"
+                android:layout_below="@+id/item_atividade_nome"
+                android:layout_toEndOf="@+id/textView3"
+                android:padding="5dp"
+                android:text="Atividades: "
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
             <android.support.design.widget.FloatingActionButton

@@ -9,9 +9,10 @@ import java.util.List;
 
 public class Treinador {
 
+    private String id;
     private String email;
     private String password;
-    private HashMap<String, Treino> treinos;
+    private HashMap<String, Treino> treinos = new HashMap<String, Treino>();
 
     public Treinador() {
     }
@@ -49,5 +50,13 @@ public class Treinador {
 
     public void setTreinos(HashMap<String, Treino> treinos) {
         this.treinos = treinos;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -19,10 +19,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import tcc.mytrainer.R;
+import tcc.mytrainer.database.Session;
+import tcc.mytrainer.facade.TreinoFacade;
 import tcc.mytrainer.fragment.treinos.cadastro.CadastroTreino;
 import tcc.mytrainer.model.Treino;
 import tcc.mytrainer.web.WebCliente;
@@ -35,7 +38,7 @@ public class TreinosFragment extends Fragment {
 
     View view;
     RecyclerView rvView;
-    List<Treino> treinos = new ArrayList<>();
+    TreinoAdapter treinoAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,13 +59,11 @@ public class TreinosFragment extends Fragment {
                 startActivity(new Intent(getActivity(), CadastroTreino.class));
             }
         });
-
-        //GET TREINOS
-        treinos = getTreinos();
-
         //INIT Recycler View
+
         rvView = (RecyclerView) view.findViewById(R.id.rv_treinos);
-        rvView.setAdapter(new TreinoAdapter(treinos, getActivity()));
+        treinoAdapter = new TreinoAdapter(new ArrayList<Treino>(Session.treinador.getTreinos().values()), getActivity());
+        rvView.setAdapter(treinoAdapter);
         RecyclerView.LayoutManager layout = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
         rvView.setLayoutManager(layout);
@@ -73,27 +74,13 @@ public class TreinosFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        treinoAdapter.update();
+        treinoAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-    }
-
-    public List<Treino> getTreinos() {
-        try {
-            WebCliente web = new WebCliente();
-            String jsonString = null;
-            jsonString = web.execute(new String[]{"treino"}).get();
-            return Treino.toList(new JSONArray(jsonString));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }
