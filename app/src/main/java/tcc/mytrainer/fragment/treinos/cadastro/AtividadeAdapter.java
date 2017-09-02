@@ -21,14 +21,16 @@ public class AtividadeAdapter extends RecyclerView.Adapter {
 
     List<Atividade> atividades;
     private Context context;
+    private AtividadeAdapter.OnItemClickListener mOnItemClickListener;
 
-    public AtividadeAdapter(List<Atividade> atividades, Context context) {
-        this.atividades = atividades;
-        this.context = context;
+    public interface OnItemClickListener{
+        void onItemClick(View view, int position);
     }
-    public AtividadeAdapter(HashMap<String, Atividade> atividades, Context context) {
+
+    public AtividadeAdapter(HashMap<String, Atividade> atividades, Context context, OnItemClickListener mOnItemClickListener) {
         this.atividades = new ArrayList<Atividade>(atividades.values());
         this.context = context;
+        this.mOnItemClickListener = mOnItemClickListener;
     }
 
     @Override
@@ -39,9 +41,17 @@ public class AtividadeAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         AtividadeHolder atividadeHolder = (AtividadeHolder) holder;
         Atividade atividade = atividades.get(position);
+
+        atividadeHolder.getButtonEdit().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnItemClickListener.onItemClick(v, position);
+            }
+        });
+
         atividadeHolder.update(atividade);
     }
 

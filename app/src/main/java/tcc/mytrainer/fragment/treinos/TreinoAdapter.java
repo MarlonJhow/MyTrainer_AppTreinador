@@ -20,7 +20,7 @@ import tcc.mytrainer.model.Treino;
 
 class TreinoAdapter extends RecyclerView.Adapter {
 
-    List<Treino> treinos;
+    public List<Treino> treinos;
     private Context context;
     private OnItemClickListener mOnItemClickListener;
 

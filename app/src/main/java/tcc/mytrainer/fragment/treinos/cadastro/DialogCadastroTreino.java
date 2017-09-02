@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 
 import tcc.mytrainer.R;
@@ -28,24 +29,36 @@ public class DialogCadastroTreino extends DialogFragment {
     public EditText atividadeRepeticoes;
     public EditText atividadeSeries;
 
+    public String idAtividade;
+
     @Override
-    public Dialog onCreateDialog(final Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle bundle) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.treino_dialog_cadastro, null))
+        View dialogAtividade = inflater.inflate(R.layout.treino_dialog_cadastro, null);
+
+        //FIELDS DIALOG
+        atividadeNome = (EditText) dialogAtividade.findViewById(R.id.atividadeNome);
+        atividadeDescricao = (EditText) dialogAtividade.findViewById(R.id.atividadeDescricao);
+        atividadeRepeticoes = (EditText) dialogAtividade.findViewById(R.id.atividadeRepeticoes);
+        atividadeSeries = (EditText) dialogAtividade.findViewById(R.id.atividadeSeries);
+
+        //NEW OR EDIT
+        if(getArguments().getString("atividadeId") != null){
+            idAtividade = getArguments().getString("atividadeId");
+
+            atividadeNome.setText(getArguments().getString("atividadeNome"));
+            atividadeDescricao.setText(getArguments().getString("atividadeDescricao"));
+            atividadeRepeticoes.setText(getArguments().getString("atividadeRepeticoes"));
+            atividadeSeries.setText(getArguments().getString("atividadeSeries"));
+        }
+
+        //LISTENERS BUTTON
+        builder.setView(dialogAtividade)
                 // Add action buttons
                 .setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-
-                        atividadeNome = (EditText) getDialog().findViewById(R.id.atividadeNome);
-                        atividadeDescricao = (EditText) getDialog().findViewById(R.id.atividadeDescricao);
-                        atividadeRepeticoes = (EditText) getDialog().findViewById(R.id.atividadeRepeticoes);
-                        atividadeSeries = (EditText) getDialog().findViewById(R.id.atividadeSeries);
-
                         mListener.onDialogPositiveClick(DialogCadastroTreino.this);
                     }
                 })
@@ -54,6 +67,7 @@ public class DialogCadastroTreino extends DialogFragment {
                         DialogCadastroTreino.this.getDialog().cancel();
                     }
                 });
+
         return builder.create();
     }
 

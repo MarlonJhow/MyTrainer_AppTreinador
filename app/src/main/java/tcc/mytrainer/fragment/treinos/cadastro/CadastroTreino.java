@@ -32,7 +32,7 @@ import tcc.mytrainer.model.Treinador;
 import tcc.mytrainer.model.Treino;
 import tcc.mytrainer.util.StringUtil;
 
-public class CadastroTreino extends AppCompatActivity implements DialogCadastroTreino.CadastroTreinoDialogListener {
+public class CadastroTreino extends AppCompatActivity implements DialogCadastroTreino.CadastroTreinoDialogListener, AtividadeAdapter.OnItemClickListener {
 
     private RecyclerView rvAtividades;
     private Treino treino;
@@ -45,17 +45,26 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
         setContentView(R.layout.treino_cadastro_activity);
         context = this;
 
-        //CREATE TREINO
-        treino = new Treino();
+        //INIT TREINO
+        if (getIntent().getStringExtra("treinoId") != null) {
+            treino = Session.treinador.getTreinos().get(getIntent().getStringExtra("treinoId"));
+
+            EditText nomeTreino = (EditText) findViewById(R.id.treinoNome);
+            EditText descricaoTreino = (EditText) findViewById(R.id.treinoDescricao);
+
+            nomeTreino.setText(treino.getNome());
+            descricaoTreino.setText(treino.getDescricao());
+        } else {
+            treino = new Treino();
+        }
 
         //CREATE RecyclerVIew
         rvAtividades = (RecyclerView) findViewById(R.id.rvAtividades);
-        atividadeAdapter = new AtividadeAdapter(treino.getAtividades(), this);
+        atividadeAdapter = new AtividadeAdapter(treino.getAtividades(), this, this);
         rvAtividades.setAdapter(atividadeAdapter);
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
         rvAtividades.setLayoutManager(layout);
-
 
         //BUTTON SHOW DIALOG ADD ATIVIDADE
         Button buttonAddAtividade = (Button) findViewById(R.id.buttonAddAtividade);
@@ -99,7 +108,13 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
 
         if (treino.getAtividades().get(dialog.atividadeNome.getText().toString()) == null) {
             Atividade atividade = new Atividade(dialog.atividadeNome.getText().toString(), dialog.atividadeDescricao.getText().toString(), dialog.atividadeRepeticoes.getText().toString(), dialog.atividadeSeries.getText().toString());
-            atividade.setId(Session.getId());
+
+            if(dialog.idAtividade != null){
+                atividade.setId(dialog.idAtividade);
+            } else {
+                atividade.setId(Session.getId());
+            }
+
             treino.getAtividades().put(atividade.getId(), atividade);
             atividadeAdapter.updateAtividadaes(treino.getAtividades());
             atividadeAdapter.notifyDataSetChanged();
@@ -108,4 +123,20 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
         }
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        Atividade atividade = atividadeAdapter.atividades.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("atividadeId", atividade.getId());
+        bundle.putString("atividadeNome", atividade.getNome());
+        bundle.putString("atividadeDescricao", atividade.getDescricao());
+        bundle.putString("atividadeRepeticoes", Integer.toString(atividade.getRepeticoes()));
+        bundle.putString("atividadeSeries", Integer.toString(atividade.getSeries()));
+
+        DialogFragment dialogAddAtividade = new DialogCadastroTreino();
+        dialogAddAtividade.setArguments(bundle);
+
+        dialogAddAtividade.show(getSupportFragmentManager(), "dialogAddAtividade");
+
+    }
 }

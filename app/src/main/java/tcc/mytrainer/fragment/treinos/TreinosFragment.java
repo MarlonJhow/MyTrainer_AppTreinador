@@ -85,6 +85,11 @@ public class TreinosFragment extends Fragment implements TreinoAdapter.OnItemCli
 
     @Override
     public void onItemClick(View view, int position) {
-        System.out.println("entrou");
+        String treinoId =  treinoAdapter.treinos.get(position).getId();
+        Intent intent = new Intent(getActivity(), CadastroTreino.class);
+        intent.putExtra("treinoId", treinoId);
+        startActivity(intent);
     }
+
+
 }

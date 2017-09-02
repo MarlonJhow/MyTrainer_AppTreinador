@@ -10,8 +10,11 @@ import tcc.mytrainer.model.Treino;
 public class TreinoFacade {
 
     public static void salvarTreino(Treino treino) {
-        treino.setId(Session.getId());
-        Session.treinador.getTreinos().put(Session.getId(), treino);
+        if (treino.getId() == null) {
+            treino.setId(Session.getId());
+        }
+
+        Session.treinador.getTreinos().put(treino.getId(), treino);
         Session.mDatabase.child("Treinador").child(Session.treinador.getId()).child("treinos").setValue(Session.treinador.getTreinos());
     }
 
