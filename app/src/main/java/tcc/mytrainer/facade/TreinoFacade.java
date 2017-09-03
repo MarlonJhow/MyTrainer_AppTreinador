@@ -18,4 +18,9 @@ public class TreinoFacade {
         Session.mDatabase.child("Treinador").child(Session.treinador.getId()).child("treinos").setValue(Session.treinador.getTreinos());
     }
 
+    public static void excluirTreino(String idTreino){
+        Session.mDatabase.child("Treinador").child(Session.treinador.getId()).child("treinos").child(idTreino).removeValue();
+    }
+
+
 }

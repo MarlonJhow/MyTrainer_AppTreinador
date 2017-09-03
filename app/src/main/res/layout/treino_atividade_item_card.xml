@@ -89,7 +89,7 @@
                 app:backgroundTint="@color/empty"
                 app:elevation="0dp"
                 app:fabSize="mini"
-                app:srcCompat="@drawable/ic_edit_black_24dp"
+                app:srcCompat="@drawable/ic_more_vert_black_24dp"
                 tools:backgroundTint="?android:attr/selectableItemBackgroundBorderless" />
 
         </RelativeLayout>

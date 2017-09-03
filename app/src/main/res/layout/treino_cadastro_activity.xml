@@ -30,7 +30,7 @@
                     android:adjustViewBounds="false"
                     android:cropToPadding="false"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/card_treinos" />
+                    app:srcCompat="@drawable/card" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -42,8 +42,9 @@
                     android:background="@android:drawable/screen_background_dark_transparent"
                     android:padding="10dp"
                     android:text="Cadastro de Treinos"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="20sp" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textColor="@color/cardview_light_background"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -90,7 +91,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvAtividades"
                 android:layout_width="match_parent"
-                android:layout_height="280dp" />
+                android:layout_height="262dp" />
 
         </LinearLayout>
 
@@ -105,8 +106,8 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:text="CANCELAR" />
 
         <Button
@@ -114,8 +115,8 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
             android:text="SALVAR" />
     </RelativeLayout>
 

@@ -3,13 +3,17 @@ package tcc.mytrainer.fragment.treinos.cadastro;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -103,9 +107,11 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
 
     }
 
+    //CALLBACK BOTÃO SALVAR DO DIALOG
     @Override
     public void onDialogPositiveClick(DialogCadastroTreino dialog) {
 
+        //ADICIONAR ATIVIDADE
         if (treino.getAtividades().get(dialog.atividadeNome.getText().toString()) == null) {
             Atividade atividade = new Atividade(dialog.atividadeNome.getText().toString(), dialog.atividadeDescricao.getText().toString(), dialog.atividadeRepeticoes.getText().toString(), dialog.atividadeSeries.getText().toString());
 
@@ -114,8 +120,9 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
             } else {
                 atividade.setId(Session.getId());
             }
-
             treino.getAtividades().put(atividade.getId(), atividade);
+
+            //ATUALIZA RECYCLER VIEW
             atividadeAdapter.updateAtividadaes(treino.getAtividades());
             atividadeAdapter.notifyDataSetChanged();
         } else {
@@ -124,19 +131,43 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
     }
 
     @Override
-    public void onItemClick(View view, int position) {
-        Atividade atividade = atividadeAdapter.atividades.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("atividadeId", atividade.getId());
-        bundle.putString("atividadeNome", atividade.getNome());
-        bundle.putString("atividadeDescricao", atividade.getDescricao());
-        bundle.putString("atividadeRepeticoes", Integer.toString(atividade.getRepeticoes()));
-        bundle.putString("atividadeSeries", Integer.toString(atividade.getSeries()));
+    public void onItemClick(View view, final int position) {
+        //CRIA MENU
+        PopupMenu popup = new PopupMenu(this, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.card_treino_cations, popup.getMenu());
+        popup.show();
 
-        DialogFragment dialogAddAtividade = new DialogCadastroTreino();
-        dialogAddAtividade.setArguments(bundle);
+        //DEFINE AÇÕES DO MENU
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.treinoActionEdit:
+                        //CARREGA DADOS PARA EDIÇÃO
+                        Atividade atividade = atividadeAdapter.atividades.get(position);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("atividadeId", atividade.getId());
+                        bundle.putString("atividadeNome", atividade.getNome());
+                        bundle.putString("atividadeDescricao", atividade.getDescricao());
+                        bundle.putString("atividadeRepeticoes", Integer.toString(atividade.getRepeticoes()));
+                        bundle.putString("atividadeSeries", Integer.toString(atividade.getSeries()));
 
-        dialogAddAtividade.show(getSupportFragmentManager(), "dialogAddAtividade");
+                        DialogFragment dialogAddAtividade = new DialogCadastroTreino();
+                        dialogAddAtividade.setArguments(bundle);
+
+                        dialogAddAtividade.show(getSupportFragmentManager(), "dialogAddAtividade");
+                        return true;
+                    case R.id.treinoActionExcluir:
+                        //REMOVE ATIVIDADE DA LISTA E ATUALIZA ADAPTER
+                        atividadeAdapter.atividades.remove(position);
+                        atividadeAdapter.notifyDataSetChanged();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
 
     }
 }

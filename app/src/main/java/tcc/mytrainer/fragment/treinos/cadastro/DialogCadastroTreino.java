@@ -44,7 +44,7 @@ public class DialogCadastroTreino extends DialogFragment {
         atividadeSeries = (EditText) dialogAtividade.findViewById(R.id.atividadeSeries);
 
         //NEW OR EDIT
-        if(getArguments().getString("atividadeId") != null){
+        if(getArguments() != null){
             idAtividade = getArguments().getString("atividadeId");
 
             atividadeNome.setText(getArguments().getString("atividadeNome"));
