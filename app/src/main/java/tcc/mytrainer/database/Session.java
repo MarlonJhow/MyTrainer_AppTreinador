@@ -16,10 +16,10 @@ import tcc.mytrainer.util.StringUtil;
 
 public class Session {
 
+    //LISTENER PARA AVISAR QUE DE CARREGAR O BANCO
     public interface FirebaseReady {
         public void listenerFirebaseReady();
     }
-
     static FirebaseReady firebaseReady;
 
     //INSTANCIAS DE AUTH E DATABASE
