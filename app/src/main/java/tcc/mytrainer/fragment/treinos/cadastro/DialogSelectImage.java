@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import tcc.mytrainer.R;
@@ -24,6 +25,9 @@ public class DialogSelectImage extends DialogFragment {
         public void onDialogPositiveClickSelectImage(DialogSelectImage dialog);
     }
 
+    //ATRIBUTOS GRID
+    public Integer thumbId;
+
     @Override
     public Dialog onCreateDialog(Bundle bundle) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -31,6 +35,13 @@ public class DialogSelectImage extends DialogFragment {
         View grid = inflater.inflate(R.layout.treino_dialog_imagem, null);
         GridView gridview = (GridView) grid.findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(getActivity()));
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                thumbId = (int) adapterView.getAdapter().getItemId(i);
+                mListener.onDialogPositiveClickSelectImage(DialogSelectImage.this);
+            }
+        });
 
         //LISTENERS BUTTON
         builder.setView(grid);

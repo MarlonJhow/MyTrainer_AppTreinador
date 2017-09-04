@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,6 +27,8 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
     private Treino treino;
     private Context context;
     private AtividadeAdapter atividadeAdapter;
+    private ImageView imageView;
+    private Integer thumbId = R.drawable.ic_exercise2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
 
                 treino.setNome(nome);
                 treino.setDescricao(descricao);
+                treino.setThumbId(thumbId);
 
                 TreinoFacade.salvarTreino(treino);
                 finish();
@@ -90,10 +94,11 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
         });
 
         //IMAGE CLICK
-        ImageView imageView = (ImageView) findViewById(R.id.imageTreino);
+        imageView = (ImageView) findViewById(R.id.imageTreino);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
                 DialogFragment dialogAddAtividade = new DialogSelectImage();
                 dialogAddAtividade.show(getSupportFragmentManager(), "dialogSelectImage");
             }
@@ -167,8 +172,8 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
 
     @Override
     public void onDialogPositiveClickSelectImage(DialogSelectImage dialog) {
-
-        System.out.println();
-
+        imageView.setImageResource(dialog.thumbId);
+        thumbId = dialog.thumbId;
+        dialog.getDialog().cancel();
     }
 }

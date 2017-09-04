@@ -1,6 +1,7 @@
 package tcc.mytrainer.fragment.treinos.cadastro;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,6 +15,16 @@ import tcc.mytrainer.R;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    // references to our images
+    private Integer[] mThumbIds = {
+            R.drawable.ic_exercise, R.drawable.ic_exercise1,
+            R.drawable.ic_exercise2, R.drawable.ic_exercise3,
+            R.drawable.ic_exercise4, R.drawable.ic_exercise5,
+            R.drawable.ic_exercise6, R.drawable.ic_exercise7,
+            R.drawable.ic_exercise8
+    };
+
+
 
     public ImageAdapter(Context c) {
         mContext = c;
@@ -28,7 +39,7 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public long getItemId(int position) {
-        return 0;
+        return mThumbIds[position];
     }
 
     // create a new ImageView for each item referenced by the Adapter
@@ -45,15 +56,8 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         imageView.setImageResource(mThumbIds[position]);
+
         return imageView;
     }
 
-    // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.ic_exercise, R.drawable.ic_exercise1,
-            R.drawable.ic_exercise2, R.drawable.ic_exercise3,
-            R.drawable.ic_exercise4, R.drawable.ic_exercise5,
-            R.drawable.ic_exercise6, R.drawable.ic_exercise7,
-            R.drawable.ic_exercise8
-    };
 }

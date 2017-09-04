@@ -16,6 +16,7 @@ public class Treino {
     private String id;
     private String nome;
     private String descricao;
+    private Integer thumbId;
     private HashMap<String, Atividade> atividades = new HashMap<>();
     private HashMap<String, String> alunos= new HashMap<>();
 
@@ -60,5 +61,14 @@ public class Treino {
 
     public void setAtividades(HashMap<String, Atividade> atividades) {
         this.atividades = atividades;
+
+    }
+
+    public Integer getThumbId() {
+        return thumbId;
+    }
+
+    public void setThumbId(Integer thumbId) {
+        this.thumbId = thumbId;
     }
 }
