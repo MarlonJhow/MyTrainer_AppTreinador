@@ -48,13 +48,28 @@
 
             </RelativeLayout>
 
-            <EditText
-                android:id="@+id/treinoNome"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Nome Treino"
-                android:inputType="textPersonName" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/treinoNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Nome Treino"
+                    android:inputType="textPersonName" />
+
+                <ImageView
+                    android:id="@+id/imageTreino"
+                    android:layout_width="46dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
+                    app:srcCompat="@drawable/ic_treino" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/treinoDescricao"
