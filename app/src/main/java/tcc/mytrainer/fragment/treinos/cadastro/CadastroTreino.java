@@ -129,6 +129,7 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
         }
     }
 
+    //CALLBACK CADASTRO DE ATIVIDADE
     @Override
     public void onItemClick(View view, final int position) {
         //CRIA MENU
@@ -170,6 +171,7 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
 
     }
 
+    //CALBACK DIALOG GRID IMAGE
     @Override
     public void onDialogPositiveClickSelectImage(DialogSelectImage dialog) {
         imageView.setImageResource(dialog.thumbId);
