@@ -25,22 +25,26 @@ import tcc.mytrainer.fragment.mensagens.MensagensFragment;
 import tcc.mytrainer.fragment.treinos.TreinosFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Session.FirebaseReady {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         //INIT FIREBASE
         FirebaseApp.initializeApp(this);
         //mAuth.signOut();
         FirebaseUser user = Session.mAuth.getCurrentUser();
-        if(user == null){
-            startActivity(new Intent(this, LoginActivity.class)) ;
+        if (user == null) {
+            startActivity(new Intent(this, LoginActivity.class));
         } else {
-            Session.initEntitys();
+            Session.initEntitys(this);
         }
+    }
 
-
-        super.onCreate(savedInstanceState);
+    //LISTENER IMPLEMENTADO PARA INICIAR APOS CARREGAR FIREBASE DATABASE
+    @Override
+    public void listenerFirebaseReady() {
         setContentView(R.layout.menu_main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,8 +68,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
-
-
     }
 
     @Override
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(id == R.id.navbar_inicio){
+        if (id == R.id.navbar_inicio) {
             getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
         } else if (id == R.id.navbar_treinos) {
             getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new TreinosFragment()).commit();
@@ -125,4 +127,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

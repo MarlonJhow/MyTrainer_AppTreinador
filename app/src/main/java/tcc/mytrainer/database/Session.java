@@ -16,12 +16,23 @@ import tcc.mytrainer.util.StringUtil;
 
 public class Session {
 
+    public interface FirebaseReady {
+        public void listenerFirebaseReady();
+    }
+
+    static FirebaseReady firebaseReady;
+
     //INSTANCIAS DE AUTH E DATABASE
     public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     //INTETIDADES DO BANCO
     public static Treinador treinador;
+
+    public static void initEntitys(FirebaseReady firebaseReadyImplement) {
+        firebaseReady = firebaseReadyImplement;
+        initEntitys();
+    }
 
     public static void initEntitys() {
         bindTreinador();
@@ -35,6 +46,7 @@ public class Session {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 treinador = dataSnapshot.getValue(Treinador.class);
+                firebaseReady.listenerFirebaseReady();
             }
 
             @Override
@@ -45,7 +57,7 @@ public class Session {
 
     }
 
-    public static String getId(){
+    public static String getId() {
         return mDatabase.push().getKey();
     }
 
