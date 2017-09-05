@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="tcc.mytrainer.fragment.treinos.cadastro.CadastroTreino">
+    tools:context="tcc.mytrainer.fragment.treinos.cadastro.CadastroTreinoActivity">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                     android:inputType="textPersonName" />
 
                 <ImageView
-                    android:id="@+id/imageTreino"
+                    android:id="@+id/imageTreinoCadastro"
                     android:layout_width="46dp"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"

@@ -47,9 +47,10 @@ class TreinoAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         TreinoHolder treinoHolder = (TreinoHolder) holder;
         Treino treino = treinos.get(position);
+
         treinoHolder.getNome().setText(treino.getNome());
         treinoHolder.getnAtividades().setText(Integer.toString(treino.getAtividades().size()));
-        treinoHolder.getnAlunos().setText(Integer.toString(treino.getAlunos().size()));
+        treinoHolder.getImageTreino().setImageResource(treino.getThumbId());
 
         ((TreinoHolder) holder).getButtonEdit().setOnClickListener(new View.OnClickListener() {
             @Override

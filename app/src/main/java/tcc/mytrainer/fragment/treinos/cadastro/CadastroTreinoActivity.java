@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,7 +20,7 @@ import tcc.mytrainer.facade.TreinoFacade;
 import tcc.mytrainer.model.Atividade;
 import tcc.mytrainer.model.Treino;
 
-public class CadastroTreino extends AppCompatActivity implements DialogCadastroTreino.CadastroTreinoDialogListener, AtividadeAdapter.OnItemClickListener, DialogSelectImage.DialogSelectImageListener {
+public class CadastroTreinoActivity extends AppCompatActivity implements DialogCadastroTreino.CadastroTreinoDialogListener, AtividadeAdapter.OnItemClickListener, DialogSelectImage.DialogSelectImageListener {
 
     private RecyclerView rvAtividades;
     private Treino treino;
@@ -42,6 +41,9 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
 
             EditText nomeTreino = (EditText) findViewById(R.id.treinoNome);
             EditText descricaoTreino = (EditText) findViewById(R.id.treinoDescricao);
+            ImageView imageView = (ImageView) findViewById(R.id.imageTreinoCadastro);
+            imageView.setImageResource(treino.getThumbId());
+            thumbId = treino.getThumbId();
 
             nomeTreino.setText(treino.getNome());
             descricaoTreino.setText(treino.getDescricao());
@@ -94,7 +96,7 @@ public class CadastroTreino extends AppCompatActivity implements DialogCadastroT
         });
 
         //IMAGE CLICK
-        imageView = (ImageView) findViewById(R.id.imageTreino);
+        imageView = (ImageView) findViewById(R.id.imageTreinoCadastro);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

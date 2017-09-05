@@ -26,7 +26,7 @@ import tcc.mytrainer.fragment.mensagens.MensagensFragment;
 import tcc.mytrainer.fragment.treinos.TreinosFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Session.FirebaseReady {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
 
     @Override
@@ -38,14 +38,12 @@ public class MainActivity extends AppCompatActivity
         FirebaseUser user = Session.mAuth.getCurrentUser();
         if (user == null) {
             startActivity(new Intent(this, LoginActivity.class));
-        } else {
-            Session.initEntitys(this);
         }
-    }
+        //CARREGA DATABASE
+        if (Session.treinador == null) {
+            Session.initEntitys();
+        }
 
-    //LISTENER IMPLEMENTADO PARA INICIAR APOS CARREGAR FIREBASE DATABASE
-    @Override
-    public void listenerFirebaseReady() {
         setContentView(R.layout.menu_main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

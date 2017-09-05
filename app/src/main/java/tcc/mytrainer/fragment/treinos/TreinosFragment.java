@@ -1,39 +1,28 @@
 package tcc.mytrainer.fragment.treinos;
 
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
 import tcc.mytrainer.facade.TreinoFacade;
-import tcc.mytrainer.fragment.treinos.cadastro.CadastroTreino;
+import tcc.mytrainer.fragment.treinos.cadastro.CadastroTreinoActivity;
 import tcc.mytrainer.model.Treino;
-import tcc.mytrainer.web.WebCliente;
 
 /**
  * Created by Marlon on 28/07/2017.
@@ -61,7 +50,7 @@ public class TreinosFragment extends Fragment implements TreinoAdapter.OnItemCli
         buttonAddTreino.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CadastroTreino.class));
+                startActivity(new Intent(getActivity(), CadastroTreinoActivity.class));
             }
         });
 
@@ -105,7 +94,7 @@ public class TreinosFragment extends Fragment implements TreinoAdapter.OnItemCli
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.treinoActionEdit:
-                        Intent intent = new Intent(getActivity(), CadastroTreino.class);
+                        Intent intent = new Intent(getActivity(), CadastroTreinoActivity.class);
                         intent.putExtra("treinoId", treinoId);
                         startActivity(intent);
                         return true;

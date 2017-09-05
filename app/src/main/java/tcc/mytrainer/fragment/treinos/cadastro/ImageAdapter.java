@@ -15,13 +15,16 @@ import tcc.mytrainer.R;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    // references to our images
+    // TODO FIX EXERCISE 12 BIKE
     private Integer[] mThumbIds = {
             R.drawable.ic_exercise, R.drawable.ic_exercise1,
             R.drawable.ic_exercise2, R.drawable.ic_exercise3,
             R.drawable.ic_exercise4, R.drawable.ic_exercise5,
             R.drawable.ic_exercise6, R.drawable.ic_exercise7,
-            R.drawable.ic_exercise8
+            R.drawable.ic_exercise8, R.drawable.ic_exercise9,
+            R.drawable.ic_exercise10, R.drawable.ic_exercise11,
+            R.drawable.ic_exercise12, R.drawable.ic_exercise13,
+            R.drawable.ic_exercise14
     };
 
 
