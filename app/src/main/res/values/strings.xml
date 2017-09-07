@@ -19,4 +19,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="cpf">CPF</string>
+    <string name="nome_titular">Nome Titular da Conta</string>
+    <string name="agencia">Agencia</string>
+    <string name="conta">Conta</string>
+    <string name="dig">Dig.</string>
 </resources>

@@ -12,6 +12,7 @@ public class Treinador {
     private String id;
     private String email;
     private String password;
+    private ContaBancaria contaBancaria;
     private HashMap<String, Treino> treinos = new HashMap<String, Treino>();
 
     public Treinador() {
@@ -58,5 +59,13 @@ public class Treinador {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public ContaBancaria getContaBancaria() {
+        return contaBancaria;
+    }
+
+    public void setContaBancaria(ContaBancaria contaBancaria) {
+        this.contaBancaria = contaBancaria;
     }
 }
