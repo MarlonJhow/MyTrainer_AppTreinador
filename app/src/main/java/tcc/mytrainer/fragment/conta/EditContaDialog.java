@@ -138,24 +138,8 @@ public class EditContaDialog extends DialogFragment {
             toastError("O NOME DEVE CONTER APENAS LETRAS");
             validate = false;
         }
-        if (Pattern.compile("\\D").matcher(cpf).find()) {
-            toastError("O CPF DEVE CONTER APENAS NUMEROS");
-            validate = false;
-        }
         if (cpf.length() != 11) {
             toastError("O CPF DEVE CONTER 11 DIGITOS");
-            validate = false;
-        }
-        if (Pattern.compile("\\D").matcher(agencia).find()) {
-            toastError("A AGENCIA DEVE CONTER APENAS DIGITOS");
-            validate = false;
-        }
-        if (Pattern.compile("\\D").matcher(agencia).find()) {
-            toastError("O DIGITO DEVE SER NUMERICO");
-            validate = false;
-        }
-        if (digito.length() != 1) {
-            toastError("O DIGITO DEVE CONTER APENAS 1 DIGITO");
             validate = false;
         }
         if (nome.isEmpty() || cpf.isEmpty() || agencia.isEmpty() || conta.isEmpty() || digito.isEmpty()) {
