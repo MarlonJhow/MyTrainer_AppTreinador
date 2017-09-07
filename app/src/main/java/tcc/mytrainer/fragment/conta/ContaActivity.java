@@ -10,12 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import java.util.HashMap;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
 import tcc.mytrainer.facade.ContaFacade;
-import tcc.mytrainer.fragment.treinos.cadastro.DialogCadastroTreino;
 import tcc.mytrainer.model.ContaBancaria;
 
 /**
@@ -26,6 +25,7 @@ public class ContaActivity extends AppCompatActivity implements EditContaDialog.
 
     private Context context;
     private ContaBancaria contaBancaria;
+
 
     //FIELDS
     TextView contaNome;
@@ -101,7 +101,7 @@ public class ContaActivity extends AppCompatActivity implements EditContaDialog.
         contaNome.setText(nome);
         contaCpf.setText(cpf);
         contaAgencia.setText(agencia);
-        String contaComDigito = conta + "-" + digito;
+        String contaComDigito = conta + " - " + digito;
         contaConta.setText(contaComDigito);
     }
 }
