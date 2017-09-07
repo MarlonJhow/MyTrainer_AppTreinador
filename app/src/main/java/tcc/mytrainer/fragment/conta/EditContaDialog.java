@@ -3,12 +3,15 @@ package tcc.mytrainer.fragment.conta;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +62,7 @@ public class EditContaDialog extends DialogFragment {
         textConta = (EditText) view.findViewById(R.id.contaContaDialog);
         textDigito = (EditText) view.findViewById(R.id.contaDigitoDialog);
 
-        if(getArguments() != null){
+        if (getArguments() != null) {
             textNome.setText(getArguments().getString("nome"));
             textCpf.setText(getArguments().getString("cpf"));
             textAgencia.setText(getArguments().getString("agencia"));
@@ -67,22 +70,13 @@ public class EditContaDialog extends DialogFragment {
             textDigito.setText(getArguments().getString("digito"));
         }
 
+
         builder.setView(view)
                 // Add action buttons
                 .setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
 
-                        nome = textNome.getText().toString();
-                        cpf = textCpf.getText().toString();
-                        agencia = textAgencia.getText().toString();
-                        conta = textConta.getText().toString();
-                        digito = textDigito.getText().toString();
-
-
-                        if (validarCampos(nome, cpf, agencia, conta, digito)) {
-                            mListener.onDialogPositiveClick(EditContaDialog.this);
-                        }
 
                     }
 
@@ -94,6 +88,32 @@ public class EditContaDialog extends DialogFragment {
                 });
 
         return builder.create();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        AlertDialog d = (AlertDialog) getDialog();
+        if (d != null) {
+            Button positiveButton = (Button) d.getButton(Dialog.BUTTON_POSITIVE);
+            positiveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    nome = textNome.getText().toString();
+                    cpf = textCpf.getText().toString();
+                    agencia = textAgencia.getText().toString();
+                    conta = textConta.getText().toString();
+                    digito = textDigito.getText().toString();
+
+
+                    if (validarCampos(nome, cpf, agencia, conta, digito)) {
+                        mListener.onDialogPositiveClick(EditContaDialog.this);
+                        dismiss();
+                    }
+
+                }
+            });
+        }
     }
 
     @Override
@@ -115,31 +135,31 @@ public class EditContaDialog extends DialogFragment {
 
         //SE ACHAR DIGITO NUMERICO
         if (Pattern.compile("\\d").matcher(nome).find()) {
-            Toast.makeText(getActivity(), "O NOME DEVE CONTER APENAS LETRAS", Toast.LENGTH_LONG).show();
+            toastError("O NOME DEVE CONTER APENAS LETRAS");
             validate = false;
         }
         if (Pattern.compile("\\D").matcher(cpf).find()) {
-            Toast.makeText(getActivity(), "O CPF DEVE CONTER APENAS NUMEROS", Toast.LENGTH_LONG).show();
+            toastError("O CPF DEVE CONTER APENAS NUMEROS");
             validate = false;
         }
         if (cpf.length() != 11) {
-            Toast.makeText(getActivity(), "O CPF DEVE CONTER 11 DIGITOS", Toast.LENGTH_LONG).show();
+            toastError("O CPF DEVE CONTER 11 DIGITOS");
             validate = false;
         }
         if (Pattern.compile("\\D").matcher(agencia).find()) {
-            Toast.makeText(getActivity(), "A AGENCIA DEVE CONTER APENAS DIGITOS", Toast.LENGTH_LONG).show();
+            toastError("A AGENCIA DEVE CONTER APENAS DIGITOS");
             validate = false;
         }
         if (Pattern.compile("\\D").matcher(agencia).find()) {
-            Toast.makeText(getActivity(), "O DIGITO DEVE SER NUMERICO ", Toast.LENGTH_LONG).show();
+            toastError("O DIGITO DEVE SER NUMERICO");
             validate = false;
         }
         if (digito.length() != 1) {
-            Toast.makeText(getActivity(), "O DIGITO DEVE CONTER APENAS 1 DIGITO", Toast.LENGTH_LONG).show();
+            toastError("O DIGITO DEVE CONTER APENAS 1 DIGITO");
             validate = false;
         }
         if (nome.isEmpty() || cpf.isEmpty() || agencia.isEmpty() || conta.isEmpty() || digito.isEmpty()) {
-            Toast.makeText(getActivity(), "TODOS OS CAMPOS DEVEM SER PREENCHIDOS", Toast.LENGTH_LONG).show();
+            toastError("TODOS OS CAMPOS DEVEM SER PREENCHIDOS");
             validate = false;
         }
 
@@ -148,6 +168,12 @@ public class EditContaDialog extends DialogFragment {
         }
 
         return validate;
+    }
+
+    private void toastError(String textError) {
+        Toast.makeText(getActivity(), textError, Toast.LENGTH_LONG).show();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getDialog().getCurrentFocus().getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
     }
 
 
