@@ -30,7 +30,7 @@
                     android:adjustViewBounds="false"
                     android:cropToPadding="false"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/card" />
+                    app:srcCompat="@drawable/card_treino" />
 
                 <TextView
                     android:id="@+id/textView2"

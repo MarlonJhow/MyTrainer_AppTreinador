@@ -19,7 +19,7 @@
             android:icon="@drawable/ic_mensagem"
             android:title="Mensagens" />
         <item
-            android:id="@+id/navbar_financeiro"
+            android:id="@+id/navbar_financeiro_conta"
             android:icon="@drawable/ic_financeiro"
             android:title="Financeiro" />
     </group>

@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import tcc.mytrainer.activity.LoginActivity;
 import tcc.mytrainer.database.Session;
 import tcc.mytrainer.fragment.alunos.AlunosFragment;
+import tcc.mytrainer.fragment.conta.ContaFragment;
 import tcc.mytrainer.fragment.inicio.InicioFragment;
 import tcc.mytrainer.fragment.mensagens.MensagensFragment;
 import tcc.mytrainer.fragment.treinos.TreinosFragment;
@@ -117,8 +118,8 @@ public class MainActivity extends AppCompatActivity
             getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new AlunosFragment()).commit();
         } else if (id == R.id.navbar_mensagens) {
             getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new MensagensFragment()).commit();
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.navbar_financeiro_conta) {
+            getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new ContaFragment()).commit();
         } else if (id == R.id.nav_send) {
 
         }
