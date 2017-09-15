@@ -84,7 +84,8 @@ public class Teste extends AppCompatActivity implements PSCheckoutListener {
                 .setBirthDate("11/11/1991");
                 //(Installments) - Objeto que é retornado no serviço de parcelamento que corresponde a parcela escolhida
                 //.setInstallments(installmentVO);
-        PSCheckout.payTransparentDefault(psTransparentDefaultRequest, this, this);
+
+        //PSCheckout.payTransparentDefault(psTransparentDefaultRequest, this, this);
 
     }
 
