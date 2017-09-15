@@ -24,6 +24,7 @@ import tcc.mytrainer.fragment.alunos.AlunosFragment;
 import tcc.mytrainer.fragment.conta.ContaActivity;
 import tcc.mytrainer.fragment.inicio.InicioFragment;
 import tcc.mytrainer.fragment.mensagens.MensagensFragment;
+import tcc.mytrainer.fragment.teste.Teste;
 import tcc.mytrainer.fragment.treinos.TreinosFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -121,7 +122,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.navbar_treinos) {
             getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new TreinosFragment()).commit();
         } else if (id == R.id.navbar_alunos) {
-            getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new AlunosFragment()).commit();
+            //getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new AlunosFragment()).commit();
+            startActivity(new Intent(this, Teste.class));
         } else if (id == R.id.navbar_mensagens) {
             getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new MensagensFragment()).commit();
         } else if (id == R.id.navbar_financeiro_conta) {
