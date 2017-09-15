@@ -38,7 +38,7 @@
             <item
                 android:id="@+id/navbar_financeiro_conta"
                 android:icon="@drawable/ic_account_balance_wallet_black_24dp"
-                android:title="Conta" />
+                android:title="Conta PagSeguro" />
         </menu>
     </item>
 

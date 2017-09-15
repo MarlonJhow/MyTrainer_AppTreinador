@@ -6,20 +6,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.regex.Pattern;
-
 import tcc.mytrainer.R;
-import tcc.mytrainer.util.StringUtil;
 
 /**
  * Created by Marlon on 07/09/2017.
@@ -28,18 +23,12 @@ import tcc.mytrainer.util.StringUtil;
 public class EditContaDialog extends DialogFragment {
 
     //STRINGS
-    public String nome;
-    public String cpf;
-    public String agencia;
-    public String conta;
-    public String digito;
+    public String email;
+    public String token;
 
     //FIELDS
-    EditText textNome;
-    EditText textCpf;
-    EditText textAgencia;
-    EditText textConta;
-    EditText textDigito;
+    EditText textEmail;
+    EditText textToken;
 
     View view;
 
@@ -56,18 +45,12 @@ public class EditContaDialog extends DialogFragment {
         view = inflater.inflate(R.layout.financeiro_conta_edit_dialog, null);
 
         //INIT FIELDS
-        textNome = (EditText) view.findViewById(R.id.contaNomeDialog);
-        textCpf = (EditText) view.findViewById(R.id.contaCpfDialog);
-        textAgencia = (EditText) view.findViewById(R.id.contaAgenciaDialog);
-        textConta = (EditText) view.findViewById(R.id.contaContaDialog);
-        textDigito = (EditText) view.findViewById(R.id.contaDigitoDialog);
+        textEmail = (EditText) view.findViewById(R.id.pagseguroEmail);
+        textToken = (EditText) view.findViewById(R.id.pagseguroToken);
 
         if (getArguments() != null) {
-            textNome.setText(getArguments().getString("nome"));
-            textCpf.setText(getArguments().getString("cpf"));
-            textAgencia.setText(getArguments().getString("agencia"));
-            textConta.setText(getArguments().getString("conta"));
-            textDigito.setText(getArguments().getString("digito"));
+            textEmail.setText(getArguments().getString("email"));
+            textToken.setText(getArguments().getString("token"));
         }
 
 
@@ -99,14 +82,10 @@ public class EditContaDialog extends DialogFragment {
             positiveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    nome = textNome.getText().toString();
-                    cpf = textCpf.getText().toString();
-                    agencia = textAgencia.getText().toString();
-                    conta = textConta.getText().toString();
-                    digito = textDigito.getText().toString();
+                    email = textEmail.getText().toString();
+                    token = textToken.getText().toString();
 
-
-                    if (validarCampos(nome, cpf, agencia, conta, digito)) {
+                    if (validarCampos(email, token)) {
                         mListener.onDialogPositiveClick(EditContaDialog.this);
                         dismiss();
                     }
@@ -130,19 +109,10 @@ public class EditContaDialog extends DialogFragment {
         }
     }
 
-    private boolean validarCampos(String nome, String cpf, String agencia, String conta, String digito) {
+    private boolean validarCampos(String email, String token) {
         boolean validate = true;
 
-        //SE ACHAR DIGITO NUMERICO
-        if (Pattern.compile("\\d").matcher(nome).find()) {
-            toastError("O NOME DEVE CONTER APENAS LETRAS");
-            validate = false;
-        }
-        if (cpf.length() != 11) {
-            toastError("O CPF DEVE CONTER 11 DIGITOS");
-            validate = false;
-        }
-        if (nome.isEmpty() || cpf.isEmpty() || agencia.isEmpty() || conta.isEmpty() || digito.isEmpty()) {
+        if (email.isEmpty() || token.isEmpty()) {
             toastError("TODOS OS CAMPOS DEVEM SER PREENCHIDOS");
             validate = false;
         }

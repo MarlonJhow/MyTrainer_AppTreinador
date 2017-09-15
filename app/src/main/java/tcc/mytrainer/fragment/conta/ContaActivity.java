@@ -10,12 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.HashMap;
-
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
 import tcc.mytrainer.facade.ContaFacade;
-import tcc.mytrainer.model.ContaBancaria;
+import tcc.mytrainer.model.ContaPagSeguro;
 
 /**
  * Created by Marlon on 28/07/2017.
@@ -24,15 +22,12 @@ import tcc.mytrainer.model.ContaBancaria;
 public class ContaActivity extends AppCompatActivity implements EditContaDialog.EditContaDialogListener {
 
     private Context context;
-    private ContaBancaria contaBancaria;
+    private ContaPagSeguro contaPagSeguro;
 
 
     //FIELDS
-    TextView contaNome;
-    TextView contaCpf;
-    TextView contaAgencia;
-    TextView contaConta;
-
+    TextView pagSeguroEmail;
+    TextView pagSeguroToken;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,17 +36,15 @@ public class ContaActivity extends AppCompatActivity implements EditContaDialog.
         context = this;
 
         //INIT FIELDS
-        contaNome = (TextView) findViewById(R.id.contaNomeText);
-        contaCpf = (TextView) findViewById(R.id.contaCpfText);
-        contaAgencia = (TextView) findViewById(R.id.contaAgenciaText);
-        contaConta = (TextView) findViewById(R.id.contaContaText);
+        pagSeguroEmail = (TextView) findViewById(R.id.contaEmail);
+        pagSeguroToken = (TextView) findViewById(R.id.contaToken);
 
         //INIT CONTA BANCARIA
-        contaBancaria = Session.treinador.getContaBancaria();
-        if(contaBancaria != null){
-            atualizarCampos(contaBancaria.getNomeTitular(), contaBancaria.getCpf(), contaBancaria.getAgencia(), contaBancaria.getConta(), contaBancaria.getContaDigito());
+        contaPagSeguro = Session.treinador.getContaPagSeguro();
+        if (contaPagSeguro != null) {
+            atualizarCampos(contaPagSeguro.getEmail(), contaPagSeguro.getToken());
         } else {
-            contaBancaria = new ContaBancaria();
+            contaPagSeguro = new ContaPagSeguro();
         }
 
         //BUTTON EDITAR
@@ -60,12 +53,9 @@ public class ContaActivity extends AppCompatActivity implements EditContaDialog.
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                if(contaBancaria != null){
-                    bundle.putString("nome", contaBancaria.getNomeTitular());
-                    bundle.putString("cpf", contaBancaria.getCpf());
-                    bundle.putString("agencia", contaBancaria.getAgencia());
-                    bundle.putString("conta", contaBancaria.getConta());
-                    bundle.putString("digito", contaBancaria.getContaDigito());
+                if (contaPagSeguro != null) {
+                    bundle.putString("email", contaPagSeguro.getEmail());
+                    bundle.putString("token", contaPagSeguro.getToken());
                 }
 
                 DialogFragment dialogAddAtividade = new EditContaDialog();
@@ -87,21 +77,31 @@ public class ContaActivity extends AppCompatActivity implements EditContaDialog.
 
     @Override
     public void onDialogPositiveClick(EditContaDialog dialog) {
-        contaBancaria.setNomeTitular(dialog.nome);
-        contaBancaria.setCpf(dialog.cpf);
-        contaBancaria.setAgencia(dialog.agencia);
-        contaBancaria.setConta(dialog.conta);
-        contaBancaria.setContaDigito(dialog.digito);
+        contaPagSeguro.setEmail(dialog.email);
+        contaPagSeguro.setToken(dialog.token);
 
-        atualizarCampos(dialog.nome, dialog.cpf, dialog.agencia, dialog.conta, dialog.digito);
-        ContaFacade.salvarConta(contaBancaria);
+        atualizarCampos(dialog.email, dialog.token);
+        ContaFacade.salvarConta(contaPagSeguro);
     }
 
-    private void atualizarCampos(String nome, String cpf, String agencia, String conta, String digito){
-        contaNome.setText(nome);
-        contaCpf.setText(cpf);
-        contaAgencia.setText(agencia);
-        String contaComDigito = conta + " - " + digito;
-        contaConta.setText(contaComDigito);
+    private void atualizarCampos(String email, String token) {
+        pagSeguroEmail.setText(email);
+        pagSeguroToken.setText(getEstrelinhas(token));
+    }
+
+    private String getEstrelinhas(String token) {
+        if (token != null) {
+            int count = 0;
+            String estrelinhas = "";
+            while (count < token.length()) {
+                estrelinhas += "*";
+                count++;
+            }
+            return estrelinhas;
+        } else {
+            return null;
+        }
+
+
     }
 }

@@ -1,7 +1,6 @@
 package tcc.mytrainer.model;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Marlon on 26/08/2017.
@@ -12,7 +11,7 @@ public class Treinador {
     private String id;
     private String email;
     private String password;
-    private ContaBancaria contaBancaria;
+    private ContaPagSeguro contaPagSeguro;
     private HashMap<String, Treino> treinos = new HashMap<String, Treino>();
 
     public Treinador() {
@@ -61,11 +60,11 @@ public class Treinador {
         this.id = id;
     }
 
-    public ContaBancaria getContaBancaria() {
-        return contaBancaria;
+    public ContaPagSeguro getContaPagSeguro() {
+        return contaPagSeguro;
     }
 
-    public void setContaBancaria(ContaBancaria contaBancaria) {
-        this.contaBancaria = contaBancaria;
+    public void setContaPagSeguro(ContaPagSeguro contaPagSeguro) {
+        this.contaPagSeguro = contaPagSeguro;
     }
 }
