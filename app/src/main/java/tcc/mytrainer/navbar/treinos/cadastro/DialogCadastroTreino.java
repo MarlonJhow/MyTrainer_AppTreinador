@@ -1,4 +1,4 @@
-package tcc.mytrainer.fragment.treinos.cadastro;
+package tcc.mytrainer.navbar.treinos.cadastro;
 
 import android.app.Activity;
 import android.app.AlertDialog;

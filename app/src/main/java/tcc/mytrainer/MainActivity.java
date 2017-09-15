@@ -2,17 +2,13 @@ package tcc.mytrainer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
@@ -20,12 +16,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 import tcc.mytrainer.activity.LoginActivity;
 import tcc.mytrainer.database.Session;
-import tcc.mytrainer.fragment.alunos.AlunosFragment;
-import tcc.mytrainer.fragment.conta.ContaActivity;
-import tcc.mytrainer.fragment.inicio.InicioFragment;
-import tcc.mytrainer.fragment.mensagens.MensagensFragment;
-import tcc.mytrainer.fragment.teste.Teste;
-import tcc.mytrainer.fragment.treinos.TreinosFragment;
+import tcc.mytrainer.navbar.cobranca.CobrancaActivity;
+import tcc.mytrainer.navbar.conta.ContaActivity;
+import tcc.mytrainer.navbar.inicio.InicioFragment;
+import tcc.mytrainer.navbar.mensagens.MensagensFragment;
+import tcc.mytrainer.navbar.teste.Teste;
+import tcc.mytrainer.navbar.treinos.TreinosFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -128,6 +124,8 @@ public class MainActivity extends AppCompatActivity
             getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new MensagensFragment()).commit();
         } else if (id == R.id.navbar_financeiro_conta) {
             startActivity(new Intent(this, ContaActivity.class));
+        } else if(id == R.id.navbar_financeiro_cobranca){
+            startActivity(new Intent(this, CobrancaActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

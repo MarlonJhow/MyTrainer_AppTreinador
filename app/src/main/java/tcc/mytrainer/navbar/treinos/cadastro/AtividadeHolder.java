@@ -1,4 +1,4 @@
-package tcc.mytrainer.fragment.treinos.cadastro;
+package tcc.mytrainer.navbar.treinos.cadastro;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;

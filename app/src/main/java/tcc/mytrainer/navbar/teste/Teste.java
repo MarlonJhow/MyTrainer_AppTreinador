@@ -1,16 +1,13 @@
-package tcc.mytrainer.fragment.teste;
+package tcc.mytrainer.navbar.teste;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import br.com.uol.pslibs.checkout_in_app.PSCheckout;
 import br.com.uol.pslibs.checkout_in_app.transparent.listener.PSCheckoutListener;
-import br.com.uol.pslibs.checkout_in_app.transparent.listener.PSInstallmentsListener;
 import br.com.uol.pslibs.checkout_in_app.transparent.vo.InstallmentVO;
 import br.com.uol.pslibs.checkout_in_app.transparent.vo.PSCheckoutResponse;
-import br.com.uol.pslibs.checkout_in_app.transparent.vo.PSInstallmentsResponse;
 import br.com.uol.pslibs.checkout_in_app.transparent.vo.PSTransparentDefaultRequest;
 import br.com.uol.pslibs.checkout_in_app.wallet.util.PSCheckoutConfig;
 import tcc.mytrainer.R;

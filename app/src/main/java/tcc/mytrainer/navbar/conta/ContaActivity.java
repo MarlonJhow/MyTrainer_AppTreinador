@@ -1,4 +1,4 @@
-package tcc.mytrainer.fragment.conta;
+package tcc.mytrainer.navbar.conta;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -32,7 +32,7 @@ public class ContaActivity extends AppCompatActivity implements EditContaDialog.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.financeiro_conta_activity);
+        setContentView(R.layout.financeiro_pagseguro_activity);
         context = this;
 
         //INIT FIELDS

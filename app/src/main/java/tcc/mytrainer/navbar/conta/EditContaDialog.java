@@ -1,4 +1,4 @@
-package tcc.mytrainer.fragment.conta;
+package tcc.mytrainer.navbar.conta;
 
 import android.app.Activity;
 import android.app.AlertDialog;

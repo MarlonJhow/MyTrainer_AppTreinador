@@ -1,4 +1,4 @@
-package tcc.mytrainer.fragment.treinos.cadastro;
+package tcc.mytrainer.navbar.treinos.cadastro;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
