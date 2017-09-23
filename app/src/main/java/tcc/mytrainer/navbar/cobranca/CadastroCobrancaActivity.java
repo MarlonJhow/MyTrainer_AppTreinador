@@ -1,12 +1,12 @@
 package tcc.mytrainer.navbar.cobranca;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 
 import tcc.mytrainer.R;
 
@@ -21,7 +21,18 @@ public class CadastroCobrancaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.financeiro_cobranca_cadastro_activity);
+        setContentView(R.layout.cobranca_cadastro_activity);
         context = this;
+
+        ImageView searchImage = (ImageView) findViewById(R.id.cadastroAlunoSearchImage);
+        searchImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment dialogAddAtividade = new ListAlunosDialog();
+                dialogAddAtividade.show(getSupportFragmentManager(), "searchAluno");
+            }
+        });
+
+
     }
 }

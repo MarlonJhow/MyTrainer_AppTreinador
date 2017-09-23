@@ -67,7 +67,7 @@
                         android:weightSum="1">
 
                         <ImageView
-                            android:id="@+id/imageView4"
+                            android:id="@+id/cadastroAlunoSearchImage"
                             android:layout_width="60dp"
                             android:layout_height="match_parent"
                             android:layout_weight="0.12"
@@ -154,7 +154,7 @@
                         android:layout_margin="5dp"
                         android:layout_weight="0.05"
                         android:gravity="center"
-                        android:text="Valor:"
+                        android:text="Valor R$:"
                         android:textAppearance="@android:style/TextAppearance.Material.Title" />
                 </LinearLayout>
 

@@ -31,14 +31,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //INIT FIREBASE
-        FirebaseApp.initializeApp(this);
         //mAuth.signOut();
+        FirebaseApp.initializeApp(this);
         FirebaseUser user = Session.mAuth.getCurrentUser();
         if (user == null) {
             startActivity(new Intent(this, LoginActivity.class));
-        }
-        //CARREGA DATABASE
-        if (Session.treinador == null) {
+        } else {
             Session.initEntitys();
         }
 
@@ -65,12 +63,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //SET INFO USUARIO NAVBAR
-        TextView navbarNome = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navbarNome);
-        TextView navbarEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navbarEmail);
-        navbarNome.setText(Session.mAuth.getCurrentUser().getDisplayName());
-        navbarEmail.setText(Session.mAuth.getCurrentUser().getEmail());
+        if (user != null) {
+            TextView navbarNome = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navbarNome);
+            TextView navbarEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navbarEmail);
+            navbarNome.setText(Session.mAuth.getCurrentUser().getDisplayName());
+            navbarEmail.setText(Session.mAuth.getCurrentUser().getEmail());
 
-        getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
+            getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
+        }
     }
 
     @Override
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity
             getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new MensagensFragment()).commit();
         } else if (id == R.id.navbar_financeiro_conta) {
             startActivity(new Intent(this, ContaActivity.class));
-        } else if(id == R.id.navbar_financeiro_cobranca){
+        } else if (id == R.id.navbar_financeiro_cobranca) {
             startActivity(new Intent(this, CobrancaActivity.class));
         }
 

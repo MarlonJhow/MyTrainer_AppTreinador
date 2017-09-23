@@ -13,6 +13,7 @@ public class Treinador {
     private String password;
     private ContaPagSeguro contaPagSeguro;
     private HashMap<String, Treino> treinos = new HashMap<String, Treino>();
+    private HashMap<String, String> idAlunos = new HashMap<String, String>();
 
     public Treinador() {
     }
@@ -66,5 +67,13 @@ public class Treinador {
 
     public void setContaPagSeguro(ContaPagSeguro contaPagSeguro) {
         this.contaPagSeguro = contaPagSeguro;
+    }
+
+    public HashMap<String, String> getIdAlunos() {
+        return idAlunos;
+    }
+
+    public void setIdAlunos(HashMap<String, String> idAlunos) {
+        this.idAlunos = idAlunos;
     }
 }

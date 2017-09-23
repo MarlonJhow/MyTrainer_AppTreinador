@@ -32,7 +32,7 @@ public class ContaActivity extends AppCompatActivity implements EditContaDialog.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.financeiro_pagseguro_activity);
+        setContentView(R.layout.pagseguro_activity);
         context = this;
 
         //INIT FIELDS

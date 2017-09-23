@@ -21,7 +21,7 @@ public class CobrancaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.financeiro_cobranca_activity);
+        setContentView(R.layout.cobranca_activity);
         context = this;
 
         FloatingActionButton buttonAddCobranca = (FloatingActionButton) findViewById(R.id.buttonAddCobranca);

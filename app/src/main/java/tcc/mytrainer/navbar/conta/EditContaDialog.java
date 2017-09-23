@@ -42,7 +42,7 @@ public class EditContaDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle bundle) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        view = inflater.inflate(R.layout.financeiro_conta_edit_dialog, null);
+        view = inflater.inflate(R.layout.pagseguro_edit_dialog, null);
 
         //INIT FIELDS
         textEmail = (EditText) view.findViewById(R.id.pagseguroEmail);
