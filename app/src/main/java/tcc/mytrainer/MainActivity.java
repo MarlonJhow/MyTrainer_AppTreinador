@@ -16,12 +16,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 import tcc.mytrainer.activity.LoginActivity;
 import tcc.mytrainer.database.Session;
-import tcc.mytrainer.navbar.cobranca.CobrancaActivity;
-import tcc.mytrainer.navbar.conta.ContaActivity;
-import tcc.mytrainer.navbar.inicio.InicioFragment;
-import tcc.mytrainer.navbar.mensagens.MensagensFragment;
-import tcc.mytrainer.navbar.teste.Teste;
-import tcc.mytrainer.navbar.treinos.TreinosFragment;
+import tcc.mytrainer.menus.cobranca.CobrancaActivity;
+import tcc.mytrainer.menus.conta.ContaActivity;
+import tcc.mytrainer.menus.inicio.InicioFragment;
+import tcc.mytrainer.menus.mensagens.MensagensFragment;
+import tcc.mytrainer.menus.teste.Teste;
+import tcc.mytrainer.menus.treinos.TreinosFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -1,4 +1,4 @@
-package tcc.mytrainer.navbar.conta;
+package tcc.mytrainer.menus.conta;
 
 import android.content.Context;
 import android.os.Bundle;

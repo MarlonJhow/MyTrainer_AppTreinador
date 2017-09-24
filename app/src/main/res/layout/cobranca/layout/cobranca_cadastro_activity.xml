@@ -79,13 +79,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="15dp"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             android:layout_marginTop="15dp"
                             android:layout_weight="0.11"
                             android:text="Aluno:"
                             android:textAppearance="@android:style/TextAppearance.Material.Title" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/cobrancaNomeAlunoText"
                             android:layout_width="220dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="15dp"
@@ -134,7 +135,7 @@
                         android:layout_margin="5dp"
                         android:layout_weight="0.05"
                         android:gravity="center"
-                        android:text="Vencimento:"
+                        android:text="Freguencia:"
                         android:textAppearance="@android:style/TextAppearance.Material.Title" />
 
                     <TextView
@@ -144,7 +145,7 @@
                         android:layout_margin="5dp"
                         android:layout_weight="0.05"
                         android:gravity="center"
-                        android:text="Freguencia:"
+                        android:text="Vencimento:"
                         android:textAppearance="@android:style/TextAppearance.Material.Title" />
 
                     <TextView

@@ -1,5 +1,6 @@
-package tcc.mytrainer.navbar.cobranca;
+package tcc.mytrainer.menus.cobranca;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -24,6 +25,11 @@ public class ListAlunosDialog extends DialogFragment implements AlunoAdapter.OnI
 
     View view;
     AlunoAdapter alunoAdapter;
+    ListAlunosDialog.ListAlunosDialogListener mListener;
+
+    public interface ListAlunosDialogListener {
+        public void getAlunoId(String idAluno);
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle bundle) {
@@ -45,7 +51,22 @@ public class ListAlunosDialog extends DialogFragment implements AlunoAdapter.OnI
     }
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(String idAluno) {
+        mListener.getAlunoId(idAluno);
+        dismiss();
+    }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Verify that the host activity implements the callback interface
+        try {
+            // Instantiate the NoticeDialogListener so we can send events to the host
+            mListener = (ListAlunosDialog.ListAlunosDialogListener) activity;
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface, throw exception
+            throw new ClassCastException(activity.toString()
+                    + " must implement NoticeDialogListener");
+        }
     }
 }

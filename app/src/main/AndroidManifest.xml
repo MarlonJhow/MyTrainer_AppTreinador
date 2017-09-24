@@ -35,11 +35,11 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".navbar.treinos.cadastro.CadastroTreinoActivity" />
-        <activity android:name=".navbar.conta.ContaActivity" />
-        <activity android:name=".navbar.cobranca.CobrancaActivity" />
-        <activity android:name=".navbar.cobranca.CadastroCobrancaActivity" />
-        <activity android:name=".navbar.teste.Teste"></activity>
+        <activity android:name=".menus.treinos.cadastro.CadastroTreinoActivity" />
+        <activity android:name=".menus.conta.ContaActivity" />
+        <activity android:name=".menus.cobranca.CobrancaActivity" />
+        <activity android:name=".menus.cobranca.CadastroCobrancaActivity" />
+        <activity android:name=".menus.teste.Teste"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package tcc.mytrainer.navbar.cobranca;
+package tcc.mytrainer.menus.cobranca;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

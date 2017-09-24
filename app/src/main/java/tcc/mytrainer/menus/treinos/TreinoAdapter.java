@@ -1,4 +1,4 @@
-package tcc.mytrainer.navbar.treinos;
+package tcc.mytrainer.menus.treinos;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

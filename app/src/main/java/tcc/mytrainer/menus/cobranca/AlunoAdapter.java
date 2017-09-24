@@ -1,26 +1,16 @@
-package tcc.mytrainer.navbar.cobranca;
+package tcc.mytrainer.menus.cobranca;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
 import tcc.mytrainer.dto.AlunoDTO;
-import tcc.mytrainer.util.DownloadImageTask;
 
 /**
  * Created by Marlon on 15/09/2017.
@@ -33,7 +23,7 @@ class AlunoAdapter extends RecyclerView.Adapter {
     private AlunoAdapter.OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(String idAluno);
     }
 
     public AlunoAdapter(List<AlunoDTO> alunos, Context context, OnItemClickListener onItemClickListener) {
@@ -58,20 +48,12 @@ class AlunoAdapter extends RecyclerView.Adapter {
 
         alunoHolder.getNome().setText(alunoDTO.getNome());
         alunoHolder.getEmail().setText(alunoDTO.getEmail());
-
-
-        //GET IMAGE FROM URL
-//            URL url = null;
-//            Bitmap bmp = null;
-//            url = new URL(alunoDTO.getFoto());
-//            InputStream is = (InputStream) url.getContent();
-//            Drawable d = Drawable.createFromStream(is, "src name");
         alunoHolder.getFoto().setImageBitmap(Session.fotosAlunos.get(alunoDTO.getFoto()));
 
         alunoHolder.getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickListener.onItemClick(v, position);
+                mOnItemClickListener.onItemClick(alunosDtos.get(position).getId());
             }
         });
 

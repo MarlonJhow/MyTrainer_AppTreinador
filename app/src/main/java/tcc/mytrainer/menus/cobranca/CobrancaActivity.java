@@ -1,4 +1,4 @@
-package tcc.mytrainer.navbar.cobranca;
+package tcc.mytrainer.menus.cobranca;
 
 import android.content.Context;
 import android.content.Intent;

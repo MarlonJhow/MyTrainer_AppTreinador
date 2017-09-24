@@ -14,6 +14,7 @@ import tcc.mytrainer.util.DownloadImageTask;
  */
 
 public class AlunoDTO {
+    private String id;
     private String nome;
     private String email;
     private String foto;
@@ -23,6 +24,7 @@ public class AlunoDTO {
     }
 
     public AlunoDTO(Aluno aluno){
+        this.id = aluno.getId();
         this.nome = aluno.getNome();
         this.email = aluno.getEmail();
         this.foto = aluno.getFotoUrl();
@@ -66,5 +68,13 @@ public class AlunoDTO {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
