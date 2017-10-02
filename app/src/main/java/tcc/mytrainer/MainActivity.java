@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //INIT FIREBASE
-        //mAuth.signOut();
+//        Session.mAuth.signOut();
         FirebaseApp.initializeApp(this);
         FirebaseUser user = Session.mAuth.getCurrentUser();
         if (user == null) {

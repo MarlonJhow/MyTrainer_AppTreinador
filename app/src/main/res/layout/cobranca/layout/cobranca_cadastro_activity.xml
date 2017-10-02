@@ -162,7 +162,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    >
 
                     <Spinner
                         android:id="@+id/spinner"
@@ -173,14 +176,16 @@
                         android:gravity="center" />
 
                     <EditText
-                        android:id="@+id/editText"
+                        android:id="@+id/cobrancaVencimento"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:ems="10"
                         android:gravity="center"
-                        android:inputType="date" />
+                        android:inputType="date"
+                        android:focusable="false"
+                        />
 
                     <EditText
                         android:id="@+id/editText2"

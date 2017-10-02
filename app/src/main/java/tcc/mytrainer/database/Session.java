@@ -61,20 +61,22 @@ public class Session {
     }
 
     private static void bindAlunos() {
-        for(String idAluno : treinador.getIdAlunos().values()){
-            mDatabase.child("Aluno").child(idAluno).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    Aluno aluno = dataSnapshot.getValue(Aluno.class);
-                    alunos.put(aluno.getId(), aluno);
-                    new DownloadImageMapTask(fotosAlunos).execute(aluno.getFotoUrl());
-                }
+        if(treinador.getIdAlunos() != null && treinador.getIdAlunos().size() > 0){
+            for (String idAluno : treinador.getIdAlunos().values()) {
+                mDatabase.child("Aluno").child(idAluno).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Aluno aluno = dataSnapshot.getValue(Aluno.class);
+                        alunos.put(aluno.getId(), aluno);
+                        new DownloadImageMapTask(fotosAlunos).execute(aluno.getFotoUrl());
+                    }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                }
-            });
+                    }
+                });
+            }
         }
     }
 
