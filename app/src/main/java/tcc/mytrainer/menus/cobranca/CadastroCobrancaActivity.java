@@ -62,7 +62,7 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
     public void getAlunoId(String idAluno) {
         aluno = Session.alunos.get(idAluno);
 
-        searchImage.setImageBitmap(Session.fotosAlunos.get(aluno.getFotoUrl()));
+//        searchImage.setImageBitmap(Session.fotosAlunos.get(aluno.getFotoUrl())); TODO set foto
         nomeAluno.setText(aluno.getNome());
     }
 

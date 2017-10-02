@@ -35,7 +35,7 @@ public class Session {
     //INTETIDADES DO BANCO
     public static Treinador treinador;
     public static HashMap<String, Aluno> alunos = new HashMap<String, Aluno>();
-    public static HashMap<String, Bitmap> fotosAlunos = new HashMap<String, Bitmap>();
+//    public static HashMap<String, Bitmap> fotosAlunos = new HashMap<String, Bitmap>();
 
     public static void initEntitys() {
         bindTreinador();
@@ -68,7 +68,7 @@ public class Session {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Aluno aluno = dataSnapshot.getValue(Aluno.class);
                         alunos.put(aluno.getId(), aluno);
-                        new DownloadImageMapTask(fotosAlunos).execute(aluno.getFotoUrl());
+//                        new DownloadImageMapTask(fotosAlunos).execute(aluno.getFotoUrl());
                     }
 
                     @Override

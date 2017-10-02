@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import tcc.mytrainer.R;
@@ -48,7 +50,8 @@ class AlunoAdapter extends RecyclerView.Adapter {
 
         alunoHolder.getNome().setText(alunoDTO.getNome());
         alunoHolder.getEmail().setText(alunoDTO.getEmail());
-        alunoHolder.getFoto().setImageBitmap(Session.fotosAlunos.get(alunoDTO.getFoto()));
+//        alunoHolder.getFoto().setImageBitmap(Session.fotosAlunos.get(alunoDTO.getFoto()));
+        Picasso.with(context).load(alunosDtos.get(position).getFoto()).into(alunoHolder.getFoto());
 
         alunoHolder.getView().setOnClickListener(new View.OnClickListener() {
             @Override
