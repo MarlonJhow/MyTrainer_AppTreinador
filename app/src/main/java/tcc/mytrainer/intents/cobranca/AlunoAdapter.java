@@ -1,4 +1,4 @@
-package tcc.mytrainer.menus.cobranca;
+package tcc.mytrainer.intents.cobranca;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +11,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import tcc.mytrainer.R;
-import tcc.mytrainer.database.Session;
 import tcc.mytrainer.dto.AlunoDTO;
 
 /**

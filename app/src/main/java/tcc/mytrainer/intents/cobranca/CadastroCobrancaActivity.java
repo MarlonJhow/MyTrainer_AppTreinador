@@ -1,4 +1,4 @@
-package tcc.mytrainer.menus.cobranca;
+package tcc.mytrainer.intents.cobranca;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -16,15 +16,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
 import tcc.mytrainer.model.Aluno;
+import tcc.mytrainer.model.Cobranca;
 
 /**
  * Created by Marlon on 15/09/2017.
@@ -80,15 +79,15 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
         datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
-                vencimento.setText(""+dia+"/"+mes+"/"+ano);
+                vencimento.setText(""+dia+"/"+(mes+1)+"/"+ano);
             }
         });
 
         //SPINNER PERIODO
         spinnerPeriodo = (Spinner) findViewById(R.id.spinnerPeriodo);
         List<String> listPeriodo = new ArrayList<String>();
-        listPeriodo.add("Unica");
-        listPeriodo.add("Mensal");
+        listPeriodo.add(Cobranca.Periodo.UNICO.toString());
+        listPeriodo.add(Cobranca.Periodo.MENSAL.toString());
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listPeriodo);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPeriodo.setAdapter(dataAdapter);
@@ -107,6 +106,10 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
         btSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Cobranca cobranca = new Cobranca();
+
+
+
                 //TODO salvar dados
             }
         });

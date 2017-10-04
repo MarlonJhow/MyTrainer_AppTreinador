@@ -1,4 +1,4 @@
-package tcc.mytrainer.menus.conta;
+package tcc.mytrainer.intents.conta;
 
 import android.content.Context;
 import android.os.Bundle;

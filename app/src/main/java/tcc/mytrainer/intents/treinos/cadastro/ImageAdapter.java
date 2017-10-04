@@ -1,4 +1,4 @@
-package tcc.mytrainer.menus.treinos.cadastro;
+package tcc.mytrainer.intents.treinos.cadastro;
 
 import android.content.Context;
 import android.view.View;

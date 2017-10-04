@@ -1,4 +1,4 @@
-package tcc.mytrainer.menus.treinos.cadastro;
+package tcc.mytrainer.intents.treinos.cadastro;
 
 import android.app.Activity;
 import android.app.AlertDialog;
