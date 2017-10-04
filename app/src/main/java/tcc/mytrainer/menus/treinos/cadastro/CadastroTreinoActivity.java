@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
@@ -127,7 +128,7 @@ public class CadastroTreinoActivity extends AppCompatActivity implements DialogC
             atividadeAdapter.updateAtividadaes(treino.getAtividades());
             atividadeAdapter.notifyDataSetChanged();
         } else {
-            //TODO TOAST MESSAGE NOME REPETIDO
+            Toast.makeText(context, "Já existe atividade com esse nome!", Toast.LENGTH_LONG).show();
         }
     }
 

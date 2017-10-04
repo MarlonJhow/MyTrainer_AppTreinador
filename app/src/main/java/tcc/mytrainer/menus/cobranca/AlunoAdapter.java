@@ -50,7 +50,6 @@ class AlunoAdapter extends RecyclerView.Adapter {
 
         alunoHolder.getNome().setText(alunoDTO.getNome());
         alunoHolder.getEmail().setText(alunoDTO.getEmail());
-//        alunoHolder.getFoto().setImageBitmap(Session.fotosAlunos.get(alunoDTO.getFoto()));
         Picasso.with(context).load(alunosDtos.get(position).getFoto()).into(alunoHolder.getFoto());
 
         alunoHolder.getView().setOnClickListener(new View.OnClickListener() {

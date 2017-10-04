@@ -7,9 +7,20 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
@@ -22,11 +33,18 @@ import tcc.mytrainer.model.Aluno;
 public class CadastroCobrancaActivity extends AppCompatActivity implements ListAlunosDialog.ListAlunosDialogListener, DatePickerDialog.OnDateSetListener {
 
     private Context context;
+
+    //COMPONENTES
     private ImageView searchImage;
     private TextView nomeAluno;
     private TextView vencimento;
-    private Aluno aluno;
+    private Spinner spinnerPeriodo;
+    private DatePickerDialog datePickerDialog;
+    private Button btCancelar;
+    private Button btSalvar;
 
+    //DTO
+    private Aluno aluno;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,8 +52,10 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
         setContentView(R.layout.cobranca_cadastro_activity);
         context = this;
 
+        //NOME ALUNO
         nomeAluno = (TextView) findViewById(R.id.cobrancaNomeAlunoText);
 
+        //FOTO ALUNO
         searchImage = (ImageView) findViewById(R.id.cadastroAlunoSearchImage);
         searchImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,9 +65,11 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
             }
         });
 
+        //VENCIMENTO
+        Calendar calendar = Calendar.getInstance();
+        datePickerDialog = new DatePickerDialog(
+                context, CadastroCobrancaActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         vencimento = (TextView) findViewById(R.id.cobrancaVencimento);
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(//TODO alterar para data dinamica
-                context, CadastroCobrancaActivity.this, 2010, 10, 10);
         vencimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,14 +77,52 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
             }
         });
 
+        datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
+                vencimento.setText(""+dia+"/"+mes+"/"+ano);
+            }
+        });
+
+        //SPINNER PERIODO
+        spinnerPeriodo = (Spinner) findViewById(R.id.spinnerPeriodo);
+        List<String> listPeriodo = new ArrayList<String>();
+        listPeriodo.add("Unica");
+        listPeriodo.add("Mensal");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listPeriodo);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPeriodo.setAdapter(dataAdapter);
+
+        //BOTÃO CANCELAR
+        btCancelar = (Button) findViewById(R.id.CobrancaCadastroBtCancelar);
+        btCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        //BOTÃO SALVAR
+        btSalvar = (Button) findViewById(R.id.CobrancaCadastroBtSalvar);
+        btSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO salvar dados
+            }
+        });
 
     }
 
     @Override
     public void getAlunoId(String idAluno) {
+        //SET ALUNO
         aluno = Session.alunos.get(idAluno);
 
-//        searchImage.setImageBitmap(Session.fotosAlunos.get(aluno.getFotoUrl())); TODO set foto
+        //SET FOTO
+        String urlFoto = aluno.getFotoUrl();
+        Picasso.with(context).load(urlFoto).into(searchImage);
+
+        //SET NOME
         nomeAluno.setText(aluno.getNome());
     }
 
