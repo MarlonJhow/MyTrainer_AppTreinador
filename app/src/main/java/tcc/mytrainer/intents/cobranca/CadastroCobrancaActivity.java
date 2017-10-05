@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -87,10 +88,10 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
             public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
                 mes++;  //ESSE LAZARENTO COMEÇA EM 0
 
-                txtVencimento.setText(""+dia+"/"+mes+"/"+ano);
+                txtVencimento.setText("" + dia + "/" + mes + "/" + ano);
 
                 try {
-                    vencimento = new SimpleDateFormat("yyyyMMdd").parse(""+ano+mes+ano);
+                    vencimento = new SimpleDateFormat("yyyyMMdd").parse("" + ano + mes + ano);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -125,18 +126,45 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
         btSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cobranca cobranca = new Cobranca();
 
-                cobranca.setIdAluno(aluno.getId());
-                cobranca.setPeriodo(Cobranca.Periodo.get(spinnerPeriodo.getSelectedItem().toString()));
-                cobranca.setVencimento(vencimento);
-                cobranca.setValor(Double.parseDouble(txtValor.getText().toString()));
-                //TODO Validação dos campos
+                if (validar()) {
+                    Cobranca.Periodo periodo = Cobranca.Periodo.get(spinnerPeriodo.getSelectedItem().toString());
+                    Double valor = Double.parseDouble(txtValor.getText().toString());
+                    Cobranca cobranca = new Cobranca();
+                    cobranca.setIdAluno(aluno.getId());
+                    cobranca.setPeriodo(periodo);
+                    cobranca.setVencimento(vencimento);
+                    cobranca.setValor(valor);
+                    CobrancaFacade.saveOrUpdate(cobranca);
+                    finish();
+                }
 
-                CobrancaFacade.saveOrUpdate(cobranca);
-                finish();
             }
         });
+
+    }
+
+    private boolean validar() {
+        String messagem = null;
+
+        if (aluno == null) {
+            messagem = "ALUNO NÃO SELECIONADO";
+        }
+
+        if (vencimento == null) {
+            messagem = "VENCIMENTO NÃO PREENCHIDO";
+        }
+
+        if (txtValor.getText().toString().isEmpty()) {
+            messagem = "VALOR NÃO PREENCHIDO";
+        }
+
+        if (messagem != null) {
+            Toast.makeText(context, messagem, Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            return true;
+        }
 
     }
 
@@ -154,7 +182,7 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
     }
 }
