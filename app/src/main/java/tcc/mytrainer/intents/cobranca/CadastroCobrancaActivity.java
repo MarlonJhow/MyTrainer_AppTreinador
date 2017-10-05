@@ -16,12 +16,16 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
+import tcc.mytrainer.facade.CobrancaFacade;
 import tcc.mytrainer.model.Aluno;
 import tcc.mytrainer.model.Cobranca;
 
@@ -35,8 +39,9 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
 
     //COMPONENTES
     private ImageView searchImage;
-    private TextView nomeAluno;
-    private TextView vencimento;
+    private TextView txtNomeAluno;
+    private TextView txtVencimento;
+    private TextView txtValor;
     private Spinner spinnerPeriodo;
     private DatePickerDialog datePickerDialog;
     private Button btCancelar;
@@ -44,6 +49,7 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
 
     //DTO
     private Aluno aluno;
+    private Date vencimento;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,10 +58,10 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
         context = this;
 
         //NOME ALUNO
-        nomeAluno = (TextView) findViewById(R.id.cobrancaNomeAlunoText);
+        txtNomeAluno = (TextView) findViewById(R.id.CobrancaCadastroTxtNomeAluno);
 
         //FOTO ALUNO
-        searchImage = (ImageView) findViewById(R.id.cadastroAlunoSearchImage);
+        searchImage = (ImageView) findViewById(R.id.CobrancaCadastroImgSearch);
         searchImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,8 +74,8 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
         Calendar calendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(
                 context, CadastroCobrancaActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        vencimento = (TextView) findViewById(R.id.cobrancaVencimento);
-        vencimento.setOnClickListener(new View.OnClickListener() {
+        txtVencimento = (TextView) findViewById(R.id.CobrancaCadastroTxtVencimento);
+        txtVencimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 datePickerDialog.show();
@@ -79,18 +85,31 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
         datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
-                vencimento.setText(""+dia+"/"+(mes+1)+"/"+ano);
+                mes++;  //ESSE LAZARENTO COMEÇA EM 0
+
+                txtVencimento.setText(""+dia+"/"+mes+"/"+ano);
+
+                try {
+                    vencimento = new SimpleDateFormat("yyyyMMdd").parse(""+ano+mes+ano);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
         //SPINNER PERIODO
-        spinnerPeriodo = (Spinner) findViewById(R.id.spinnerPeriodo);
+        spinnerPeriodo = (Spinner) findViewById(R.id.CobrancaCadastroSpnPeriodo);
         List<String> listPeriodo = new ArrayList<String>();
         listPeriodo.add(Cobranca.Periodo.UNICO.toString());
         listPeriodo.add(Cobranca.Periodo.MENSAL.toString());
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listPeriodo);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPeriodo.setAdapter(dataAdapter);
+
+
+        //TEXT VALOR
+        txtValor = (TextView) findViewById(R.id.CobrancaCadastroTxtValor);
 
         //BOTÃO CANCELAR
         btCancelar = (Button) findViewById(R.id.CobrancaCadastroBtCancelar);
@@ -108,9 +127,14 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
             public void onClick(View view) {
                 Cobranca cobranca = new Cobranca();
 
+                cobranca.setIdAluno(aluno.getId());
+                cobranca.setPeriodo(Cobranca.Periodo.get(spinnerPeriodo.getSelectedItem().toString()));
+                cobranca.setVencimento(vencimento);
+                cobranca.setValor(Double.parseDouble(txtValor.getText().toString()));
+                //TODO Validação dos campos
 
-
-                //TODO salvar dados
+                CobrancaFacade.saveOrUpdate(cobranca);
+                finish();
             }
         });
 
@@ -126,7 +150,7 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
         Picasso.with(context).load(urlFoto).into(searchImage);
 
         //SET NOME
-        nomeAluno.setText(aluno.getNome());
+        txtNomeAluno.setText(aluno.getNome());
     }
 
     @Override

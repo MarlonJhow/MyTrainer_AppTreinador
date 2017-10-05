@@ -67,7 +67,7 @@
                         android:weightSum="1">
 
                         <ImageView
-                            android:id="@+id/cadastroAlunoSearchImage"
+                            android:id="@+id/CobrancaCadastroImgSearch"
                             android:layout_width="60dp"
                             android:layout_height="match_parent"
                             android:layout_weight="0.12"
@@ -86,7 +86,7 @@
                             android:textAppearance="@android:style/TextAppearance.Material.Title" />
 
                         <TextView
-                            android:id="@+id/cobrancaNomeAlunoText"
+                            android:id="@+id/CobrancaCadastroTxtNomeAluno"
                             android:layout_width="220dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="15dp"
@@ -168,7 +168,7 @@
                     >
 
                     <Spinner
-                        android:id="@+id/spinnerPeriodo"
+                        android:id="@+id/CobrancaCadastroSpnPeriodo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -176,7 +176,7 @@
                         android:gravity="center" />
 
                     <EditText
-                        android:id="@+id/cobrancaVencimento"
+                        android:id="@+id/CobrancaCadastroTxtVencimento"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -188,7 +188,7 @@
                         />
 
                     <EditText
-                        android:id="@+id/editText2"
+                        android:id="@+id/CobrancaCadastroTxtValor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"

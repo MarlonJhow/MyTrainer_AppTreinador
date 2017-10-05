@@ -21,6 +21,14 @@ public class Cobranca {
         public String toString() {
             return this.label;
         }
+
+        public static Periodo get(String entrada) {
+            Periodo periodo;
+
+            periodo = entrada.equals(UNICO) ? UNICO : MENSAL;
+
+            return periodo;
+        }
     }
 
     private String id;
