@@ -15,10 +15,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseUser;
 
 import tcc.mytrainer.R;
-import tcc.mytrainer.intents.LoginActivity;
 import tcc.mytrainer.database.Session;
 import tcc.mytrainer.intents.cobranca.CobrancaActivity;
-import tcc.mytrainer.intents.conta.ContaActivity;
+import tcc.mytrainer.intents.conta.ContaFragment;
 import tcc.mytrainer.intents.inicio.InicioFragment;
 import tcc.mytrainer.intents.mensagens.MensagensFragment;
 import tcc.mytrainer.intents.teste.Teste;
@@ -124,7 +123,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.navbar_mensagens) {
             getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new MensagensFragment()).commit();
         } else if (id == R.id.navbar_financeiro_conta) {
-            startActivity(new Intent(this, ContaActivity.class));
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new ContaFragment()).commit();
         } else if (id == R.id.navbar_financeiro_cobranca) {
             startActivity(new Intent(this, CobrancaActivity.class));
         }

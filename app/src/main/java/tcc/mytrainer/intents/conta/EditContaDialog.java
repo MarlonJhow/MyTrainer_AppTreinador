@@ -32,12 +32,6 @@ public class EditContaDialog extends DialogFragment {
 
     View view;
 
-    EditContaDialogListener mListener;
-
-    public interface EditContaDialogListener {
-        public void onDialogPositiveClick(EditContaDialog dialog);
-    }
-
     @Override
     public Dialog onCreateDialog(Bundle bundle) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -86,26 +80,13 @@ public class EditContaDialog extends DialogFragment {
                     token = textToken.getText().toString();
 
                     if (validarCampos(email, token)) {
-                        mListener.onDialogPositiveClick(EditContaDialog.this);
+                        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, getActivity().getIntent().putExtra("email",email).putExtra("token", token));
+//                        mListener.onDialogPositiveClick(EditContaDialog.this);
                         dismiss();
                     }
 
                 }
             });
-        }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        // Verify that the host activity implements the callback interface
-        try {
-            // Instantiate the NoticeDialogListener so we can send events to the host
-            mListener = (EditContaDialogListener) activity;
-        } catch (ClassCastException e) {
-            // The activity doesn't implement the interface, throw exception
-            throw new ClassCastException(activity.toString()
-                    + " must implement NoticeDialogListener");
         }
     }
 

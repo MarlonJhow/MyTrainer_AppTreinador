@@ -1,12 +1,16 @@
 package tcc.mytrainer.intents.conta;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,10 +23,12 @@ import tcc.mytrainer.model.ContaPagSeguro;
  * Created by Marlon on 28/07/2017.
  */
 
-public class ContaActivity extends AppCompatActivity implements EditContaDialog.EditContaDialogListener {
+public class ContaFragment extends Fragment  {
 
-    private Context context;
+    private View view;
+    private FragmentActivity myContext;
     private ContaPagSeguro contaPagSeguro;
+    private Fragment self;
 
 
     //FIELDS
@@ -30,25 +36,30 @@ public class ContaActivity extends AppCompatActivity implements EditContaDialog.
     TextView pagSeguroToken;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pagseguro_activity);
-        context = this;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        view = inflater.inflate(R.layout.pagseguro_activity, container, false);
+        self = this;
 
         //INIT FIELDS
-        pagSeguroEmail = (TextView) findViewById(R.id.contaEmail);
-        pagSeguroToken = (TextView) findViewById(R.id.contaToken);
+        pagSeguroEmail = (TextView) view.findViewById(R.id.contaEmail);
+        pagSeguroToken = (TextView) view.findViewById(R.id.contaToken);
 
         //INIT CONTA BANCARIA
-        contaPagSeguro = Session.treinador.getContaPagSeguro();
-        if (contaPagSeguro != null) {
+        if (Session.treinador != null && Session.treinador.getContaPagSeguro() != null) {
+            contaPagSeguro = Session.treinador.getContaPagSeguro();
             atualizarCampos(contaPagSeguro.getEmail(), contaPagSeguro.getToken());
         } else {
             contaPagSeguro = new ContaPagSeguro();
         }
 
         //BUTTON EDITAR
-        FloatingActionButton buttonEdit = (FloatingActionButton) findViewById(R.id.buttonEditConta);
+        FloatingActionButton buttonEdit = (FloatingActionButton) view.findViewById(R.id.buttonEditConta);
         buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,28 +71,12 @@ public class ContaActivity extends AppCompatActivity implements EditContaDialog.
 
                 DialogFragment dialogAddAtividade = new EditContaDialog();
                 dialogAddAtividade.setArguments(bundle);
-                dialogAddAtividade.show(getSupportFragmentManager(), "editContaDialog");
+                dialogAddAtividade.setTargetFragment(self, 0);
+                dialogAddAtividade.show(myContext.getSupportFragmentManager(), "editContaDialog");
             }
         });
 
-        //BUTTON VOLTAR
-        Button buttonVoltar = (Button) findViewById(R.id.contaVoltarButton);
-        buttonVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-    }
-
-    @Override
-    public void onDialogPositiveClick(EditContaDialog dialog) {
-        contaPagSeguro.setEmail(dialog.email);
-        contaPagSeguro.setToken(dialog.token);
-
-        atualizarCampos(dialog.email, dialog.token);
-        ContaFacade.salvarConta(contaPagSeguro);
+        return view;
     }
 
     private void atualizarCampos(String email, String token) {
@@ -104,4 +99,24 @@ public class ContaActivity extends AppCompatActivity implements EditContaDialog.
 
 
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        myContext = (FragmentActivity) activity;
+        super.onAttach(activity);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String email = data.getStringExtra("email");
+        String token = data.getStringExtra("token");
+
+        contaPagSeguro.setEmail(email);
+        contaPagSeguro.setToken(token);
+
+        atualizarCampos(email, token);
+        ContaFacade.salvarConta(contaPagSeguro);
+
+    }
 }
+

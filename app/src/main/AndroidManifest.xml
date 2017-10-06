@@ -36,7 +36,7 @@
             android:name=".intents.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".intents.treinos.cadastro.CadastroTreinoActivity" />
-        <activity android:name=".intents.conta.ContaActivity" />
+        <activity android:name=".intents.conta.ContaFragment" />
         <activity android:name=".intents.cobranca.CobrancaActivity" />
         <activity android:name=".intents.cobranca.CadastroCobrancaActivity" />
         <activity android:name=".intents.teste.Teste"></activity>
