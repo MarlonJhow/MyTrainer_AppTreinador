@@ -20,7 +20,6 @@ public class CobrancaFacade {
             cobranca.setId(id);
         }
 
-        treinador.getCobrancas().put(cobranca.getId(), cobranca);
         Session.mDatabase.child("Treinador").child(Session.treinador.getId()).child("cobrancas").child(cobranca.getId()).setValue(cobranca.getId());
         Session.mDatabase.child("Aluno").child(cobranca.getIdAluno()).child("cobrancas").child(cobranca.getId()).setValue(cobranca.getId());
         Session.mDatabase.child("Cobranca").child(cobranca.getId()).setValue(cobranca);
