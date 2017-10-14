@@ -2,12 +2,12 @@ package tcc.mytrainer.menus.cobranca;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -19,10 +19,8 @@ import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
@@ -83,21 +81,9 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
             }
         });
 
-        datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
-                mes++;  //ESSE LAZARENTO COMEÇA EM 0
-
-                txtVencimento.setText("" + dia + "/" + mes + "/" + ano);
-
-                try {
-                    vencimento = new SimpleDateFormat("yyyyMMdd").parse("" + ano + mes + ano);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            datePickerDialog.setOnDateSetListener(CadastroCobrancaActivity.this);
+        }
 
         //TEXT VALOR
         txtValor = (TextView) findViewById(R.id.CobrancaCadastroTxtValor);
@@ -113,7 +99,8 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
 
         //BOTÃO SALVAR
         btSalvar = (Button) findViewById(R.id.CobrancaCadastroBtSalvar);
-        btSalvar.setOnClickListener(new View.OnClickListener() {
+        btSalvar.setOnClickListener(
+                new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -171,7 +158,15 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
     }
 
     @Override
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+    public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
+        mes++;  //ESSE LAZARENTO COMEÇA EM 0
 
+        txtVencimento.setText("" + dia + "/" + mes + "/" + ano);
+
+        try {
+            vencimento = new SimpleDateFormat("yyyyMMdd").parse("" + ano + mes + ano);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
