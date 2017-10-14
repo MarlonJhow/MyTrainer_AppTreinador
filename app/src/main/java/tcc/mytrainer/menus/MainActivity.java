@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
             navbarNome.setText(Session.mAuth.getCurrentUser().getDisplayName());
             navbarEmail.setText(Session.mAuth.getCurrentUser().getEmail());
 
-            getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
         }
     }
 
@@ -114,18 +114,18 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.navbar_inicio) {
-            getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
         } else if (id == R.id.navbar_treinos) {
-            getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new TreinosFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new TreinosFragment()).commit();
         } else if (id == R.id.navbar_alunos) {
             //getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new AlunosFragment()).commit();
             startActivity(new Intent(this, Teste.class));
         } else if (id == R.id.navbar_mensagens) {
-            getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new MensagensFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new MensagensFragment()).commit();
         } else if (id == R.id.navbar_financeiro_conta) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new ContaFragment()).commit();
         } else if (id == R.id.navbar_financeiro_cobranca) {
-            startActivity(new Intent(this, CobrancaActivity.class));
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new CobrancaActivity()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -36,10 +36,8 @@
             android:name=".menus.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".menus.treinos.cadastro.CadastroTreinoActivity" />
-        <activity android:name=".menus.conta.ContaFragment" />
-        <activity android:name=".menus.cobranca.CobrancaActivity" />
         <activity android:name=".menus.cobranca.CadastroCobrancaActivity" />
-        <activity android:name=".menus.teste.Teste"></activity>
+        <activity android:name=".menus.teste.Teste" />
     </application>
 
 </manifest>

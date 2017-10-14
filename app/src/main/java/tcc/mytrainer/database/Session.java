@@ -1,11 +1,5 @@
 package tcc.mytrainer.database;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.widget.ImageView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,11 +9,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-import tcc.mytrainer.dto.AlunoDTO;
 import tcc.mytrainer.model.Aluno;
+import tcc.mytrainer.model.Cobranca;
 import tcc.mytrainer.model.Treinador;
-import tcc.mytrainer.util.DownloadImageMapTask;
-import tcc.mytrainer.util.DownloadImageTask;
 import tcc.mytrainer.util.StringUtil;
 
 /**
@@ -35,7 +27,7 @@ public class Session {
     //INTETIDADES DO BANCO
     public static Treinador treinador;
     public static HashMap<String, Aluno> alunos = new HashMap<String, Aluno>();
-//    public static HashMap<String, Bitmap> fotosAlunos = new HashMap<String, Bitmap>();
+    public static HashMap<String, Cobranca> cobrancas = new HashMap<String, Cobranca>();
 
     public static void initEntitys() {
         bindTreinador();
@@ -49,7 +41,9 @@ public class Session {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 treinador = dataSnapshot.getValue(Treinador.class);
+                //CARREGA ENTIDADES RELACIONADAS A TREINADOR
                 bindAlunos();
+                bindCobrancas();
             }
 
             @Override
@@ -68,6 +62,25 @@ public class Session {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Aluno aluno = dataSnapshot.getValue(Aluno.class);
                         alunos.put(aluno.getId(), aluno);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        }
+    }
+
+    private static void bindCobrancas(){
+        if(treinador.getIdAlunos() != null && treinador.getIdAlunos().size() > 0){
+            for (String idCobranca : treinador.getIdCobrancas().values()) {
+                mDatabase.child("Cobranca").child(idCobranca).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Cobranca cobranca = dataSnapshot.getValue(Cobranca.class);
+                        cobrancas.put(cobranca.getId(), cobranca);
                     }
 
                     @Override
