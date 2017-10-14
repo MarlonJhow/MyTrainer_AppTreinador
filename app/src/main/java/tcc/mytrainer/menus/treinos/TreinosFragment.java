@@ -1,4 +1,4 @@
-package tcc.mytrainer.intents.treinos;
+package tcc.mytrainer.menus.treinos;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
 import tcc.mytrainer.facade.TreinoFacade;
-import tcc.mytrainer.intents.treinos.cadastro.CadastroTreinoActivity;
+import tcc.mytrainer.menus.treinos.cadastro.CadastroTreinoActivity;
 import tcc.mytrainer.model.Treino;
 
 /**

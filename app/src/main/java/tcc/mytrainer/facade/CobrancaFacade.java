@@ -13,6 +13,7 @@ public class CobrancaFacade {
 
     public static void saveOrUpdate(Cobranca cobranca) {
         Treinador treinador = Session.treinador;
+        cobranca.setIdTreinador(treinador.getId());
 
         if(cobranca.getId() == null){
             String id = Session.getId();
@@ -20,6 +21,8 @@ public class CobrancaFacade {
         }
 
         treinador.getCobrancas().put(cobranca.getId(), cobranca);
-        Session.mDatabase.child("Treinador").child(Session.treinador.getId()).child("cobrancas").setValue(treinador.getCobrancas());
+        Session.mDatabase.child("Treinador").child(Session.treinador.getId()).child("cobrancas").child(cobranca.getId()).setValue(cobranca.getId());
+        Session.mDatabase.child("Aluno").child(cobranca.getIdAluno()).child("cobrancas").child(cobranca.getId()).setValue(cobranca.getId());
+        Session.mDatabase.child("Cobranca").child(cobranca.getId()).setValue(cobranca);
     }
 }

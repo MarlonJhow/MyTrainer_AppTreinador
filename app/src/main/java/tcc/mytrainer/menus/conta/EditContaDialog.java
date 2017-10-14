@@ -1,4 +1,4 @@
-package tcc.mytrainer.intents.conta;
+package tcc.mytrainer.menus.conta;
 
 import android.app.Activity;
 import android.app.AlertDialog;

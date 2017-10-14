@@ -68,7 +68,6 @@ public class Session {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Aluno aluno = dataSnapshot.getValue(Aluno.class);
                         alunos.put(aluno.getId(), aluno);
-//                        new DownloadImageMapTask(fotosAlunos).execute(aluno.getFotoUrl());
                     }
 
                     @Override

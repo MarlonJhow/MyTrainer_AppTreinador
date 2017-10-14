@@ -1,4 +1,4 @@
-package tcc.mytrainer.intents.teste;
+package tcc.mytrainer.menus.teste;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;

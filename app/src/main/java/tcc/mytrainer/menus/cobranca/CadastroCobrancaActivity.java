@@ -1,4 +1,4 @@
-package tcc.mytrainer.intents.cobranca;
+package tcc.mytrainer.menus.cobranca;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -99,16 +99,6 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
             }
         });
 
-        //SPINNER PERIODO
-        spinnerPeriodo = (Spinner) findViewById(R.id.CobrancaCadastroSpnPeriodo);
-        List<String> listPeriodo = new ArrayList<String>();
-        listPeriodo.add(Cobranca.Periodo.UNICO.toString());
-        listPeriodo.add(Cobranca.Periodo.MENSAL.toString());
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listPeriodo);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPeriodo.setAdapter(dataAdapter);
-
-
         //TEXT VALOR
         txtValor = (TextView) findViewById(R.id.CobrancaCadastroTxtValor);
 
@@ -128,11 +118,10 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
             public void onClick(View view) {
 
                 if (validar()) {
-                    Cobranca.Periodo periodo = Cobranca.Periodo.get(spinnerPeriodo.getSelectedItem().toString());
                     Double valor = Double.parseDouble(txtValor.getText().toString());
                     Cobranca cobranca = new Cobranca();
                     cobranca.setIdAluno(aluno.getId());
-                    cobranca.setPeriodo(periodo);
+                    cobranca.setPeriodo(Cobranca.Periodo.UNICO);
                     cobranca.setVencimento(vencimento);
                     cobranca.setValor(valor);
                     CobrancaFacade.saveOrUpdate(cobranca);

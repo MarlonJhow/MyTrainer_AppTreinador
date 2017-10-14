@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".intents.MainActivity"
+            android:name=".menus.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -33,13 +33,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".intents.LoginActivity"
+            android:name=".menus.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".intents.treinos.cadastro.CadastroTreinoActivity" />
-        <activity android:name=".intents.conta.ContaFragment" />
-        <activity android:name=".intents.cobranca.CobrancaActivity" />
-        <activity android:name=".intents.cobranca.CadastroCobrancaActivity" />
-        <activity android:name=".intents.teste.Teste"></activity>
+        <activity android:name=".menus.treinos.cadastro.CadastroTreinoActivity" />
+        <activity android:name=".menus.conta.ContaFragment" />
+        <activity android:name=".menus.cobranca.CobrancaActivity" />
+        <activity android:name=".menus.cobranca.CadastroCobrancaActivity" />
+        <activity android:name=".menus.teste.Teste"></activity>
     </application>
 
 </manifest>

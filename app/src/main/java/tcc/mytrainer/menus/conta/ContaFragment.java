@@ -1,4 +1,4 @@
-package tcc.mytrainer.intents.conta;
+package tcc.mytrainer.menus.conta;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import tcc.mytrainer.R;

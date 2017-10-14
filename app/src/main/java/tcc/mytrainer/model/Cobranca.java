@@ -8,6 +8,14 @@ import java.util.Date;
 
 public class Cobranca {
 
+    public String getIdTreinador() {
+        return idTreinador;
+    }
+
+    public void setIdTreinador(String idTreinador) {
+        this.idTreinador = idTreinador;
+    }
+
     public enum Periodo {
         UNICO("Unico"), MENSAL("Mensal");
 
@@ -33,6 +41,7 @@ public class Cobranca {
 
     private String id;
     private String idAluno;
+    private String idTreinador;
     private Periodo periodo;
     private Date vencimento;
     private Double valor;

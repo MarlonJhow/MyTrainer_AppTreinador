@@ -1,4 +1,4 @@
-package tcc.mytrainer.intents.cobranca;
+package tcc.mytrainer.menus.cobranca;
 
 import android.app.Activity;
 import android.app.AlertDialog;

@@ -1,4 +1,4 @@
-package tcc.mytrainer.intents;
+package tcc.mytrainer.menus;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +16,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
-import tcc.mytrainer.intents.cobranca.CobrancaActivity;
-import tcc.mytrainer.intents.conta.ContaFragment;
-import tcc.mytrainer.intents.inicio.InicioFragment;
-import tcc.mytrainer.intents.mensagens.MensagensFragment;
-import tcc.mytrainer.intents.teste.Teste;
-import tcc.mytrainer.intents.treinos.TreinosFragment;
+import tcc.mytrainer.menus.cobranca.CobrancaActivity;
+import tcc.mytrainer.menus.conta.ContaFragment;
+import tcc.mytrainer.menus.inicio.InicioFragment;
+import tcc.mytrainer.menus.mensagens.MensagensFragment;
+import tcc.mytrainer.menus.teste.Teste;
+import tcc.mytrainer.menus.treinos.TreinosFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
