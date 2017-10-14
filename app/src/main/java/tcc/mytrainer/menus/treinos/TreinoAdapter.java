@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
@@ -27,8 +28,8 @@ class TreinoAdapter extends RecyclerView.Adapter {
         void onItemClick(View view, int position);
     }
 
-    public TreinoAdapter(List<Treino> treinos, Context context, OnItemClickListener mOnItemClickListener) {
-        this.treinos = treinos;
+    public TreinoAdapter(Map<String, Treino> treinos, Context context, OnItemClickListener mOnItemClickListener) {
+        this.treinos = new ArrayList<Treino>(treinos.values());
         this.context = context;
         this.mOnItemClickListener= mOnItemClickListener;
     }
@@ -51,7 +52,7 @@ class TreinoAdapter extends RecyclerView.Adapter {
         treinoHolder.getnAtividades().setText(Integer.toString(treino.getAtividades().size()));
         treinoHolder.getImageTreino().setImageResource(treino.getThumbId());
 
-        ((TreinoHolder) holder).getButtonEdit().setOnClickListener(new View.OnClickListener() {
+        treinoHolder.getButtonEdit().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mOnItemClickListener.onItemClick(v, position);

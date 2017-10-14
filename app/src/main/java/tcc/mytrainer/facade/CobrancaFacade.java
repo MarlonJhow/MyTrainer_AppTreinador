@@ -16,12 +16,19 @@ public class CobrancaFacade {
         cobranca.setIdTreinador(treinador.getId());
 
         if(cobranca.getId() == null){
-            String id = Session.getId();
-            cobranca.setId(id);
+            cobranca.setId(Session.getId());
         }
 
-        Session.mDatabase.child("Treinador").child(Session.treinador.getId()).child("cobrancas").child(cobranca.getId()).setValue(cobranca.getId());
-        Session.mDatabase.child("Aluno").child(cobranca.getIdAluno()).child("cobrancas").child(cobranca.getId()).setValue(cobranca.getId());
+        //UPDATE TREINADOR FK COBRANCA
+        Session.treinador.getIdCobrancas().put(cobranca.getId() , cobranca.getId());
+        Session.mDatabase.child("Treinador").child(Session.treinador.getId()).child("idCobrancas").child(cobranca.getId()).setValue(cobranca.getId());
+
+        //UPDATE ALUNO FK COBRANCA
+        Session.alunos.get(cobranca.getIdAluno()).getIdCobrancas().put(cobranca.getId(), cobranca.getId());
+        Session.mDatabase.child("Aluno").child(cobranca.getIdAluno()).child("idCobrancas").child(cobranca.getId()).setValue(cobranca.getId());
+
+        //UPDATE COBRANCA
+        Session.cobrancas.put(cobranca.getId(), cobranca);
         Session.mDatabase.child("Cobranca").child(cobranca.getId()).setValue(cobranca);
     }
 }

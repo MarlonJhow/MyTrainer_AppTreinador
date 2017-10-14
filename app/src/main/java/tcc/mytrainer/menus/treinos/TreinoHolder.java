@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import tcc.mytrainer.R;
 
+
 /**
  * Created by Marlon on 04/08/2017.
  */

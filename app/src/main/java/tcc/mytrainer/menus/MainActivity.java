@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
-import tcc.mytrainer.menus.cobranca.CobrancaActivity;
+import tcc.mytrainer.menus.cobranca.CobrancaFragment;
 import tcc.mytrainer.menus.conta.ContaFragment;
 import tcc.mytrainer.menus.inicio.InicioFragment;
 import tcc.mytrainer.menus.mensagens.MensagensFragment;
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.navbar_financeiro_conta) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new ContaFragment()).commit();
         } else if (id == R.id.navbar_financeiro_cobranca) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new CobrancaActivity()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new CobrancaFragment()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

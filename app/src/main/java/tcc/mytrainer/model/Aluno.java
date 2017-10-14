@@ -2,6 +2,8 @@ package tcc.mytrainer.model;
 
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 /**
  * Created by Marlon on 15/09/2017.
  */
@@ -11,7 +13,7 @@ public class Aluno {
     private String nome;
     private String email;
     private String fotoUrl;
-    private ImageView imageView;
+    private HashMap<String, String> idCobrancas;
 
     public Aluno() {
     }
@@ -48,11 +50,11 @@ public class Aluno {
         this.fotoUrl = fotoUrl;
     }
 
-    public ImageView getImageView() {
-        return imageView;
+    public HashMap<String, String> getIdCobrancas() {
+        return idCobrancas;
     }
 
-    public void setImageView(ImageView imageView) {
-        this.imageView = imageView;
+    public void setIdCobrancas(HashMap<String, String> idCobrancas) {
+        this.idCobrancas = idCobrancas;
     }
 }

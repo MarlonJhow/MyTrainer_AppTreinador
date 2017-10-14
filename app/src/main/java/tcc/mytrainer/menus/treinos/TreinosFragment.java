@@ -56,7 +56,7 @@ public class TreinosFragment extends Fragment implements TreinoAdapter.OnItemCli
 
         //INIT Recycler View
         rvView = (RecyclerView) view.findViewById(R.id.rv_treinos);
-        treinoAdapter = new TreinoAdapter(new ArrayList<Treino>(Session.treinador.getTreinos().values()), getActivity(), this);
+        treinoAdapter = new TreinoAdapter(Session.treinador.getTreinos(), getActivity(), this);
         rvView.setAdapter(treinoAdapter);
         RecyclerView.LayoutManager layout = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);

@@ -2,6 +2,9 @@ package tcc.mytrainer.model;
 
 import java.util.Date;
 
+import tcc.mytrainer.enums.Periodo;
+import tcc.mytrainer.enums.Status;
+
 /**
  * Created by marlonjhow on 04/10/17.
  */
@@ -16,33 +19,12 @@ public class Cobranca {
         this.idTreinador = idTreinador;
     }
 
-    public enum Periodo {
-        UNICO("Unico"), MENSAL("Mensal");
-
-        String label;
-
-        Periodo(String label){
-            this.label = label;
-        }
-
-        @Override
-        public String toString() {
-            return this.label;
-        }
-
-        public static Periodo get(String entrada) {
-            Periodo periodo;
-
-            periodo = entrada.equals(UNICO) ? UNICO : MENSAL;
-
-            return periodo;
-        }
-    }
 
     private String id;
     private String idAluno;
     private String idTreinador;
     private Periodo periodo;
+    private Status status;
     private Date vencimento;
     private Double valor;
 
@@ -87,5 +69,13 @@ public class Cobranca {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
