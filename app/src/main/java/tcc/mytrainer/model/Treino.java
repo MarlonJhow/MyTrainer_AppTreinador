@@ -1,12 +1,8 @@
 package tcc.mytrainer.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
+import tcc.mytrainer.enums.ImageTreino;
 
 /**
  * Created by Marlon on 03/08/2017.
@@ -14,11 +10,12 @@ import java.util.List;
 
 public class Treino {
     private String id;
+    private String idTreinador;
     private String nome;
     private String descricao;
-    private Integer thumbId;
+    private ImageTreino imageTreino;
     private HashMap<String, Atividade> atividades = new HashMap<>();
-    private HashMap<String, String> alunos= new HashMap<>();
+    private HashMap<String, String> idAlunos = new HashMap<>();
 
     public Treino() {
     }
@@ -48,11 +45,11 @@ public class Treino {
     }
 
     public HashMap<String, String> getAlunos() {
-        return alunos;
+        return idAlunos;
     }
 
     public void setAlunos(HashMap<String, String> alunos) {
-        this.alunos = alunos;
+        this.idAlunos = alunos;
     }
 
     public HashMap<String, Atividade> getAtividades() {
@@ -64,11 +61,19 @@ public class Treino {
 
     }
 
-    public Integer getThumbId() {
-        return thumbId;
+    public ImageTreino getImageTreino() {
+        return imageTreino;
     }
 
-    public void setThumbId(Integer thumbId) {
-        this.thumbId = thumbId;
+    public void setImageTreino(ImageTreino imageTreino) {
+        this.imageTreino = imageTreino;
+    }
+
+    public String getIdTreinador() {
+        return idTreinador;
+    }
+
+    public void setIdTreinador(String idTreinador) {
+        this.idTreinador = idTreinador;
     }
 }

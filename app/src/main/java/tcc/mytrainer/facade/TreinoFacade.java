@@ -14,12 +14,35 @@ public class TreinoFacade {
             treino.setId(Session.getId());
         }
 
-        Session.treinador.getTreinos().put(treino.getId(), treino);
-        Session.mDatabase.child("Treinador").child(Session.treinador.getId()).child("treinos").setValue(Session.treinador.getTreinos());
+        //UPDATE FK Treinador
+        Session.treinador.getIdTreinos().put(treino.getId(),treino.getId());
+        Session.mDatabase
+                .child("Treino")
+                .child(treino.getId())
+                .setValue(treino);
+
+        //UPDATE Treino;
+        Session.treinos.put(treino.getId(), treino);
+        Session.mDatabase
+                .child("Treinador")
+                .child(Session.treinador.getId())
+                .child("idTreinos")
+                .child(treino.getId())
+                .setValue(treino.getId());
     }
 
     public static void excluirTreino(String idTreino){
-        Session.mDatabase.child("Treinador").child(Session.treinador.getId()).child("treinos").child(idTreino).removeValue();
+
+        Session.treinos.remove(idTreino);
+        Session.mDatabase.child("Treino").child(idTreino).removeValue();
+
+        Session.treinador.getIdTreinos().remove(idTreino);
+        Session.mDatabase
+                .child("Treino")
+                .child(Session.treinador.getId())
+                .child("treinos")
+                .child(idTreino)
+                .removeValue();
     }
 
 

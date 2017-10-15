@@ -6,7 +6,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
 import tcc.mytrainer.R;
+import tcc.mytrainer.enums.ImageTreino;
 
 /**
  * Created by Marlon on 04/09/2017.
@@ -15,18 +17,23 @@ import tcc.mytrainer.R;
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     // TODO FIX EXERCISE 12 BIKE
-    private Integer[] mThumbIds = {
-            R.drawable.ic_exercise, R.drawable.ic_exercise1,
-            R.drawable.ic_exercise2, R.drawable.ic_exercise3,
-            R.drawable.ic_exercise4, R.drawable.ic_exercise5,
-            R.drawable.ic_exercise6, R.drawable.ic_exercise7,
-            R.drawable.ic_exercise8, R.drawable.ic_exercise9,
-            R.drawable.ic_exercise10, R.drawable.ic_exercise11,
-            R.drawable.ic_exercise12, R.drawable.ic_exercise13,
-            R.drawable.ic_exercise14
+    private ImageTreino[] mThumbIds = {
+            ImageTreino.ic_exercise,
+            ImageTreino.ic_exercise1,
+            ImageTreino.ic_exercise2,
+            ImageTreino.ic_exercise3,
+            ImageTreino.ic_exercise4,
+            ImageTreino.ic_exercise5,
+            ImageTreino.ic_exercise6,
+            ImageTreino.ic_exercise7,
+            ImageTreino.ic_exercise8,
+            ImageTreino.ic_exercise9,
+            ImageTreino.ic_exercise10,
+            ImageTreino.ic_exercise11,
+            ImageTreino.ic_exercise12,
+            ImageTreino.ic_exercise13,
+            ImageTreino.ic_exercise14
     };
-
-
 
     public ImageAdapter(Context c) {
         mContext = c;
@@ -36,12 +43,12 @@ public class ImageAdapter extends BaseAdapter {
         return mThumbIds.length;
     }
 
-    public Object getItem(int position) {
-        return null;
+    public ImageTreino getItem(int position) {
+        return mThumbIds[position];
     }
 
     public long getItemId(int position) {
-        return mThumbIds[position];
+        return mThumbIds[position].getDrawable();
     }
 
     // create a new ImageView for each item referenced by the Adapter
@@ -57,7 +64,7 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds[position]);
+        imageView.setImageResource(mThumbIds[position].getDrawable());
 
         return imageView;
     }

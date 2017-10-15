@@ -12,6 +12,7 @@ import java.util.HashMap;
 import tcc.mytrainer.model.Aluno;
 import tcc.mytrainer.model.Cobranca;
 import tcc.mytrainer.model.Treinador;
+import tcc.mytrainer.model.Treino;
 import tcc.mytrainer.util.StringUtil;
 
 /**
@@ -28,6 +29,7 @@ public class Session {
     public static Treinador treinador;
     public static HashMap<String, Aluno> alunos = new HashMap<String, Aluno>();
     public static HashMap<String, Cobranca> cobrancas = new HashMap<String, Cobranca>();
+    public static HashMap<String, Treino> treinos = new HashMap<String, Treino>();
 
     public static void initEntitys() {
         bindTreinador();
@@ -44,6 +46,7 @@ public class Session {
                 //CARREGA ENTIDADES RELACIONADAS A TREINADOR
                 bindAlunos();
                 bindCobrancas();
+                bindTreinos();
             }
 
             @Override
@@ -54,8 +57,27 @@ public class Session {
 
     }
 
+    private static void bindTreinos() {
+        if(treinador != null){
+            for (String idTreino : treinador.getIdTreinos().values()) {
+                mDatabase.child("Treino").child(idTreino).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Treino treino = dataSnapshot.getValue(Treino.class);
+                        treinos.put(treino.getId(), treino);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        }
+    }
+
     private static void bindAlunos() {
-        if(treinador.getIdAlunos() != null && treinador.getIdAlunos().size() > 0){
+        if(treinador != null){
             for (String idAluno : treinador.getIdAlunos().values()) {
                 mDatabase.child("Aluno").child(idAluno).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -74,7 +96,7 @@ public class Session {
     }
 
     private static void bindCobrancas(){
-        if(treinador.getIdAlunos() != null && treinador.getIdAlunos().size() > 0){
+        if(treinador != null){
             for (String idCobranca : treinador.getIdCobrancas().values()) {
                 mDatabase.child("Cobranca").child(idCobranca).addValueEventListener(new ValueEventListener() {
                     @Override

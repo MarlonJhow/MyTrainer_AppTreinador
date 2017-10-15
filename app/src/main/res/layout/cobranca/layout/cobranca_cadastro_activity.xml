@@ -134,7 +134,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="0.05"
-                        android:gravity="center"
+                        android:gravity="right|center"
                         android:text="Vencimento:"
                         android:textAppearance="@android:style/TextAppearance.Material.Title" />
 
@@ -144,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="0.05"
-                        android:gravity="center"
+                        android:gravity="right|center"
                         android:text="Valor R$:"
                         android:textAppearance="@android:style/TextAppearance.Material.Title" />
                 </LinearLayout>

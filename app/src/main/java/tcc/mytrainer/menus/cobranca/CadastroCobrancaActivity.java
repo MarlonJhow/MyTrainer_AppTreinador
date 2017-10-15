@@ -25,7 +25,6 @@ import java.util.Date;
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
 import tcc.mytrainer.enums.Periodo;
-import tcc.mytrainer.enums.Status;
 import tcc.mytrainer.facade.CobrancaFacade;
 import tcc.mytrainer.model.Aluno;
 import tcc.mytrainer.model.Cobranca;
@@ -111,7 +110,6 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
                     Cobranca cobranca = new Cobranca();
                     cobranca.setIdAluno(aluno.getId());
                     cobranca.setPeriodo(Periodo.UNICO);
-                    cobranca.setStatus(Status.PENDENTE);
                     cobranca.setVencimento(vencimento);
                     cobranca.setValor(valor);
                     CobrancaFacade.saveOrUpdate(cobranca);
@@ -167,7 +165,7 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
         txtVencimento.setText("" + dia + "/" + mes + "/" + ano);
 
         try {
-            vencimento = new SimpleDateFormat("yyyyMMdd").parse("" + ano + mes + dia);
+            vencimento = new SimpleDateFormat("yyyyMMdd").parse("" + ano + mes + ano);
         } catch (ParseException e) {
             e.printStackTrace();
         }

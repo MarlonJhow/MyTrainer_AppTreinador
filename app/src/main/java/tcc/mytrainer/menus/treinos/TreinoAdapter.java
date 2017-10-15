@@ -50,7 +50,7 @@ class TreinoAdapter extends RecyclerView.Adapter {
 
         treinoHolder.getNome().setText(treino.getNome());
         treinoHolder.getnAtividades().setText(Integer.toString(treino.getAtividades().size()));
-        treinoHolder.getImageTreino().setImageResource(treino.getThumbId());
+        treinoHolder.getImageTreino().setImageResource(treino.getImageTreino().getDrawable());
 
         treinoHolder.getButtonEdit().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +68,6 @@ class TreinoAdapter extends RecyclerView.Adapter {
     }
 
     public void update() {
-        treinos = new ArrayList<Treino>(Session.treinador.getTreinos().values());
+        treinos = new ArrayList<Treino>(Session.treinos.values());
     }
 }

@@ -10,24 +10,16 @@ public class Treinador {
 
     private String id;
     private String email;
-    private String password;
     private ContaPagSeguro contaPagSeguro;
-    private HashMap<String, Treino> treinos = new HashMap<String, Treino>();
+    private HashMap<String, String> idTreinos = new HashMap<String, String>();
     private HashMap<String, String> idCobrancas = new HashMap<String, String>();
     private HashMap<String, String> idAlunos = new HashMap<String, String>();
 
     public Treinador() {
     }
 
-    public Treinador(String email, String password) {
+    public Treinador(String email) {
         this.email = email;
-        this.password = password;
-    }
-
-    public void update(Treinador t) {
-        this.email = t.getEmail();
-        this.password = t.getPassword();
-        this.treinos = t.getTreinos();
     }
 
     public String getEmail() {
@@ -38,21 +30,6 @@ public class Treinador {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public HashMap<String, Treino> getTreinos() {
-        return treinos;
-    }
-
-    public void setTreinos(HashMap<String, Treino> treinos) {
-        this.treinos = treinos;
-    }
 
     public String getId() {
         return id;
@@ -84,5 +61,13 @@ public class Treinador {
 
     public void setIdCobrancas(HashMap<String, String> idCobrancas) {
         this.idCobrancas = idCobrancas;
+    }
+
+    public HashMap<String, String> getIdTreinos() {
+        return idTreinos;
+    }
+
+    public void setIdTreinos(HashMap<String, String> idTreinos) {
+        this.idTreinos = idTreinos;
     }
 }

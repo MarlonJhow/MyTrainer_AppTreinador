@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import tcc.mytrainer.R;
+import tcc.mytrainer.enums.ImageTreino;
 
 /**
  * Created by Marlon on 04/09/2017.
@@ -26,7 +27,7 @@ public class DialogSelectImage extends DialogFragment {
     }
 
     //ATRIBUTOS GRID
-    public Integer thumbId;
+    public ImageTreino imageTreino;
 
     @Override
     public Dialog onCreateDialog(Bundle bundle) {
@@ -38,7 +39,7 @@ public class DialogSelectImage extends DialogFragment {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                thumbId = (int) adapterView.getAdapter().getItemId(i);
+                imageTreino = (ImageTreino) adapterView.getAdapter().getItem(i);
                 mListener.onDialogPositiveClickSelectImage(DialogSelectImage.this);
             }
         });

@@ -235,7 +235,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                        Treinador newTreinador = new Treinador(email, password);
+                        Treinador newTreinador = new Treinador(email);
                         String id = StringUtil.formatEmailToId(email);
                         newTreinador.setId(id);
                         Session.mDatabase.child("Treinador").child(id).setValue(newTreinador);

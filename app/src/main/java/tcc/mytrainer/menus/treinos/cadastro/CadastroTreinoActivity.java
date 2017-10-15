@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
+import tcc.mytrainer.enums.ImageTreino;
 import tcc.mytrainer.facade.TreinoFacade;
 import tcc.mytrainer.model.Atividade;
 import tcc.mytrainer.model.Treino;
@@ -28,7 +29,7 @@ public class CadastroTreinoActivity extends AppCompatActivity implements DialogC
     private Context context;
     private AtividadeAdapter atividadeAdapter;
     private ImageView imageView;
-    private Integer thumbId = R.drawable.ic_exercise2;
+    private ImageTreino imageTreino = ImageTreino.ic_exercise2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,13 +39,13 @@ public class CadastroTreinoActivity extends AppCompatActivity implements DialogC
 
         //INIT TREINO
         if (getIntent().getStringExtra("treinoId") != null) {
-            treino = Session.treinador.getTreinos().get(getIntent().getStringExtra("treinoId"));
+            treino = Session.treinos.get(getIntent().getStringExtra("treinoId"));
 
             EditText nomeTreino = (EditText) findViewById(R.id.treinoNome);
             EditText descricaoTreino = (EditText) findViewById(R.id.treinoDescricao);
             ImageView imageView = (ImageView) findViewById(R.id.imageTreinoCadastro);
-            imageView.setImageResource(treino.getThumbId());
-            thumbId = treino.getThumbId();
+            imageView.setImageResource(treino.getImageTreino().getDrawable());
+            imageTreino = treino.getImageTreino();
 
             nomeTreino.setText(treino.getNome());
             descricaoTreino.setText(treino.getDescricao());
@@ -80,7 +81,7 @@ public class CadastroTreinoActivity extends AppCompatActivity implements DialogC
 
                 treino.setNome(nome);
                 treino.setDescricao(descricao);
-                treino.setThumbId(thumbId);
+                treino.setImageTreino(imageTreino);
 
                 TreinoFacade.salvarTreino(treino);
                 finish();
@@ -177,8 +178,8 @@ public class CadastroTreinoActivity extends AppCompatActivity implements DialogC
     //CALBACK DIALOG GRID IMAGE
     @Override
     public void onDialogPositiveClickSelectImage(DialogSelectImage dialog) {
-        imageView.setImageResource(dialog.thumbId);
-        thumbId = dialog.thumbId;
+        imageView.setImageResource(dialog.imageTreino.getDrawable());
+        imageTreino = dialog.imageTreino;
         dialog.getDialog().cancel();
     }
 }
