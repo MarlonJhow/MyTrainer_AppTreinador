@@ -1,5 +1,6 @@
 package tcc.mytrainer.menus.treinos;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -70,6 +71,10 @@ public class TreinosFragment extends Fragment implements TreinoAdapter.OnItemCli
         super.onStart();
         treinoAdapter.update();
         treinoAdapter.notifyDataSetChanged();
+        if (treinoAdapter.getItemCount() != Session.treinos.size()) {
+            Snackbar.make(view, "TREINO SALVO COM SUCESSO!", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
     }
 
     @Override

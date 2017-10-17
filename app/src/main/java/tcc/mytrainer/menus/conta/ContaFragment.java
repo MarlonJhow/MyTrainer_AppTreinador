@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
-import tcc.mytrainer.facade.ContaFacade;
+import tcc.mytrainer.facade.ContaPagSeguroFacade;
 import tcc.mytrainer.model.ContaPagSeguro;
 
 /**
@@ -114,7 +115,10 @@ public class ContaFragment extends Fragment  {
         contaPagSeguro.setToken(token);
 
         atualizarCampos(email, token);
-        ContaFacade.salvarConta(contaPagSeguro);
+        ContaPagSeguroFacade.salvarConta(contaPagSeguro);
+
+        Snackbar.make(view, "CONTA SALVA COM SUCESSO!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
 
     }
 }

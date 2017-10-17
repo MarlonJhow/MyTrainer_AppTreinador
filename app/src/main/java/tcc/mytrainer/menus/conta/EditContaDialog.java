@@ -98,10 +98,6 @@ public class EditContaDialog extends DialogFragment {
             validate = false;
         }
 
-        if (validate) {
-            Toast.makeText(getActivity(), "DADOS DA CONTA SALVO COM SUCESSO", Toast.LENGTH_LONG).show();
-        }
-
         return validate;
     }
 
