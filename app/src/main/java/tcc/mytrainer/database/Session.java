@@ -21,6 +21,12 @@ import tcc.mytrainer.util.StringUtil;
 
 public class Session {
 
+    public interface FinishLoad{
+        void callback();
+    }
+
+    private static FinishLoad finishLoad;
+
     //INSTANCIAS DE AUTH E DATABASE
     public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -31,9 +37,13 @@ public class Session {
     public static HashMap<String, Cobranca> cobrancas = new HashMap<String, Cobranca>();
     public static HashMap<String, Treino> treinos = new HashMap<String, Treino>();
 
-    public static void initEntitys() {
+    private static Boolean firstTime = true;
+
+    public static void initEntitys(FinishLoad callback) {
+        finishLoad = callback;
         bindTreinador();
     }
+
 
     private static void bindTreinador() {
         //OBTEM ID DO USUARIO DA SESSÃO
@@ -47,6 +57,12 @@ public class Session {
                 bindAlunos();
                 bindCobrancas();
                 bindTreinos();
+
+                if(firstTime){
+                    firstTime = false;
+                    try { Thread.sleep (1000); } catch (InterruptedException ex) {}
+                    finishLoad.callback();
+                }
             }
 
             @Override
@@ -117,11 +133,5 @@ public class Session {
     public static String getId() {
         return mDatabase.push().getKey();
     }
-
-
-    public static void saveTreinador(){
-
-    }
-
 
 }

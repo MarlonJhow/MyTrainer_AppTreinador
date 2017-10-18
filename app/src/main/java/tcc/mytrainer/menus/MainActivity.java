@@ -30,19 +30,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //INIT FIREBASE
-//        Session.mAuth.signOut();
-        FirebaseApp.initializeApp(this);
-        FirebaseUser user = Session.mAuth.getCurrentUser();
-        if (user == null) {
-            startActivity(new Intent(this, LoginActivity.class));
-        } else {
-            Session.initEntitys();
-        }
-
         setContentView(R.layout.menu_main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //INIT FIREBASE
+//        Session.mAuth.signOut();
+//        FirebaseApp.initializeApp(this);
+//        FirebaseUser user = Session.mAuth.getCurrentUser();
+//        if (user == null) {
+//            startActivity(new Intent(this, LoginActivity.class));
+//            finish();
+//        } else {
+//            Session.initEntitys();
+//        }
+
 
         //FLOATING BUTTON
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -62,15 +64,14 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        //SET INFO USUARIO NAVBAR
-        if (user != null) {
-            TextView navbarNome = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navbarNome);
-            TextView navbarEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navbarEmail);
-            navbarNome.setText(Session.mAuth.getCurrentUser().getDisplayName());
-            navbarEmail.setText(Session.mAuth.getCurrentUser().getEmail());
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
-        }
+        //SET INFO USUARIO NAVBAR
+        FirebaseUser user = Session.mAuth.getCurrentUser();
+        TextView navbarNome = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navbarNome);
+        TextView navbarEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navbarEmail);
+        navbarNome.setText(user.getDisplayName());
+        navbarEmail.setText(user.getEmail());
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new InicioFragment()).commit();
     }
 
     @Override
