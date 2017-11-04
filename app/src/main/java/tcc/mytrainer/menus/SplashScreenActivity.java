@@ -30,14 +30,17 @@ public class SplashScreenActivity extends AppCompatActivity {
         FirebaseUser user = Session.mAuth.getCurrentUser();
         if (user == null) {
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         } else {
             Session.initEntitys(new Session.FinishLoad() {
                 @Override
                 public void callback() {
                     self.startActivity(new Intent(self, MainActivity.class));
+                    finish();
                 }
             });
         }
     }
+
 
 }
