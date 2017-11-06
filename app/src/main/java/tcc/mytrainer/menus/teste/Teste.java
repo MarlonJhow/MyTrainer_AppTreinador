@@ -1,8 +1,16 @@
 package tcc.mytrainer.menus.teste;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import br.com.uol.pslibs.checkout_in_app.PSCheckout;
 import br.com.uol.pslibs.checkout_in_app.transparent.listener.PSCheckoutListener;
@@ -14,8 +22,12 @@ import tcc.mytrainer.R;
 
 public class Teste extends AppCompatActivity implements PSCheckoutListener {
 
+    AppCompatActivity self;
+
     String SELLER_TOKEN = "8A019ACD197F417C8D7B3778DD0B37E1";
     String SELLER_EMAIL = "jhow.mjy@gmail.com";
+
+    String valor;
 
     InstallmentVO installmentVO;
 
@@ -23,6 +35,41 @@ public class Teste extends AppCompatActivity implements PSCheckoutListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teste);
+        self = this;
+
+        Button btPagar = (Button) findViewById(R.id.pagarPagSeguro);
+        btPagar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(self);
+                builder.setTitle("Código de Segurança");
+
+                final EditText input = new EditText(self);
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                builder.setView(input);
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        valor = ((EditText) findViewById(R.id.etValor)).getText().toString();
+                        String ccv = input.getText().toString();
+                        pagar(ccv);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+            }
+        });
+
+    }
+
+    public void pagar(String ccv) {
         //INIT CHECKOUT
         PSCheckoutConfig psCheckoutConfig = new PSCheckoutConfig();
         psCheckoutConfig.setSellerEmail(SELLER_EMAIL);
@@ -62,7 +109,7 @@ public class Teste extends AppCompatActivity implements PSCheckoutListener {
                 //(String) - CEP do comprador
                 .setPostalCode("82560420")
                 //(String) - Minimo R$ 1.00 - Valor total da transação
-                .setTotalValue("1.00")
+                .setTotalValue(valor)
                 //(String) - Valor unitário do produto
                 .setAmount("1.00")
                 //(String) - Maximo 100 caracteres - Descrição do pagamento
@@ -72,17 +119,17 @@ public class Teste extends AppCompatActivity implements PSCheckoutListener {
                 //(String) - Numero do cartão de credito
                 .setCreditCard("5162205824077422")
                 //(String) - Codigo de segurança do cartão de credito
-                .setCvv("159")
+                .setCvv(ccv)
                 //(String) - Mes de expiração do cartão de credito
                 .setExpMonth("02")
                 //(String) - Ano de expiração do cartão de credito
                 .setExpYear("19")
                 //(String) - formato: dd/MM/yyyy - Data de nascimento do comprador
                 .setBirthDate("11/11/1991");
-                //(Installments) - Objeto que é retornado no serviço de parcelamento que corresponde a parcela escolhida
-                //.setInstallments(installmentVO);
+        //(Installments) - Objeto que é retornado no serviço de parcelamento que corresponde a parcela escolhida
+        //.setInstallments(installmentVO);
 
-        //PSCheckout.payTransparentDefault(psTransparentDefaultRequest, this, this);
+        PSCheckout.payTransparentDefault(psTransparentDefaultRequest, this, this);
 
     }
 
@@ -93,19 +140,23 @@ public class Teste extends AppCompatActivity implements PSCheckoutListener {
 
     @Override
     public void onSuccess(PSCheckoutResponse psCheckoutResponse) {
-                System.out.println("");
+        System.out.println("");
 
     }
 
     @Override
     public void onFailure(PSCheckoutResponse psCheckoutResponse) {
-                System.out.println("");
+        System.out.println("");
 
     }
 
     @Override
     public void onProcessing() {
-                System.out.println("");
-
+//        TODO
+//        View view  = findViewById(R.id.layoutPagSeguro);
+//        Snackbar bar = Snackbar.make(view, "Somthing", Snackbar.LENGTH_INDEFINITE);
+//        Snackbar.SnackbarLayout snack_view = (Snackbar.SnackbarLayout) bar.getView();
+//        snack_view.addView(new ProgressBar(this));
+//        bar.show();
     }
 }

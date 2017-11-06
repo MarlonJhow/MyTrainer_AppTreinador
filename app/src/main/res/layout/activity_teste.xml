@@ -13,5 +13,32 @@
 
     </FrameLayout>
 
+    <LinearLayout
+        android:id="@+id/layoutPagSeguro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/buttonPagSeguro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PagSeguro"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <EditText
+            android:id="@+id/etValor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Valor"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/pagarPagSeguro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pagar" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
