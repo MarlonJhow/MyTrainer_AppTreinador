@@ -77,7 +77,7 @@ public class Teste extends AppCompatActivity implements PSCheckoutListener {
         //Informe o fragment container
         psCheckoutConfig.setContainer(R.id.pagamento_fragment);
 
-        //Inicializa apenas os recursos de pagamento transparente e boleto
+        //Inicializa apenas os recursos de pagamento transparente
         PSCheckout.initTransparent(this, psCheckoutConfig);
 
         PSTransparentDefaultRequest psTransparentDefaultRequest = new PSTransparentDefaultRequest();
@@ -140,23 +140,27 @@ public class Teste extends AppCompatActivity implements PSCheckoutListener {
 
     @Override
     public void onSuccess(PSCheckoutResponse psCheckoutResponse) {
-        System.out.println("");
-
+        View view  = findViewById(R.id.layoutPagSeguro);
+        Snackbar bar = Snackbar.make(view, "Pagamento realizado com sucesso", Snackbar.LENGTH_LONG);
+        Snackbar.SnackbarLayout snack_view = (Snackbar.SnackbarLayout) bar.getView();
+        bar.show();
     }
 
     @Override
     public void onFailure(PSCheckoutResponse psCheckoutResponse) {
-        System.out.println("");
+        View view = findViewById(R.id.layoutPagSeguro);
+        Snackbar bar = Snackbar.make(view, "Erro ao realizar pagamento", Snackbar.LENGTH_LONG);
+        Snackbar.SnackbarLayout snack_view = (Snackbar.SnackbarLayout) bar.getView();
+        bar.show();
 
     }
 
     @Override
     public void onProcessing() {
 //        TODO
-//        View view  = findViewById(R.id.layoutPagSeguro);
-//        Snackbar bar = Snackbar.make(view, "Somthing", Snackbar.LENGTH_INDEFINITE);
-//        Snackbar.SnackbarLayout snack_view = (Snackbar.SnackbarLayout) bar.getView();
-//        snack_view.addView(new ProgressBar(this));
-//        bar.show();
+        View view  = findViewById(R.id.layoutPagSeguro);
+        Snackbar bar = Snackbar.make(view, "Processando pagameto", Snackbar.LENGTH_LONG);
+        Snackbar.SnackbarLayout snack_view = (Snackbar.SnackbarLayout) bar.getView();
+        bar.show();
     }
 }
