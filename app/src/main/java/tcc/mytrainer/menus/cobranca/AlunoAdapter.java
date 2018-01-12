@@ -8,20 +8,28 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tcc.mytrainer.R;
+import tcc.mytrainer.database.Session;
 import tcc.mytrainer.dto.AlunoDTO;
+import tcc.mytrainer.dto.CobrancaDTO;
+import tcc.mytrainer.model.Aluno;
 
 /**
  * Created by Marlon on 15/09/2017.
  */
 
-class AlunoAdapter extends RecyclerView.Adapter {
+public class AlunoAdapter extends RecyclerView.Adapter {
 
     private List<AlunoDTO> alunosDtos;
     private Context context;
     private AlunoAdapter.OnItemClickListener mOnItemClickListener;
+
+    public void update() {
+        alunosDtos = AlunoDTO.toList(new ArrayList<Aluno>(Session.alunos.values()));
+    }
 
     public interface OnItemClickListener {
         void onItemClick(String idAluno);

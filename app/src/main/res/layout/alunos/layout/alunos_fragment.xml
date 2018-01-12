@@ -55,7 +55,7 @@
                 android:layout_height="51dp">
 
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/buttonAddCobranca"
+                    android:id="@+id/buttonAddAluno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -66,7 +66,7 @@
                     app:backgroundTint="@color/empty"
                     app:elevation="0dp"
                     app:fabSize="mini"
-                    app:srcCompat="@drawable/ic_add_black" />
+                    app:srcCompat="@drawable/ic_search_black_24dp" />
 
             </RelativeLayout>
 

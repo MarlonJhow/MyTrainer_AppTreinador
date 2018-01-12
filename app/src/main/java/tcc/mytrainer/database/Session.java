@@ -1,5 +1,7 @@
 package tcc.mytrainer.database;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -132,6 +134,23 @@ public class Session {
 
     public static String getId() {
         return mDatabase.push().getKey();
+    }
+
+    public static Task getAluno(String email) {
+        final TaskCompletionSource<Aluno> tcs = new TaskCompletionSource<>();
+        mDatabase.child("Aluno").child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Aluno aluno = dataSnapshot.getValue(Aluno.class);
+                tcs.setResult(aluno);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return tcs.getTask();
     }
 
 }

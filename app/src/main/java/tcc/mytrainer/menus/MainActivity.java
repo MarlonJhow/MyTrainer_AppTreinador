@@ -1,6 +1,5 @@
 package tcc.mytrainer.menus;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,16 +10,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseUser;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
+import tcc.mytrainer.menus.alunos.AlunosFragment;
 import tcc.mytrainer.menus.cobranca.CobrancaFragment;
 import tcc.mytrainer.menus.conta.ContaFragment;
 import tcc.mytrainer.menus.inicio.InicioFragment;
 import tcc.mytrainer.menus.mensagens.MensagensFragment;
-import tcc.mytrainer.menus.teste.Teste;
 import tcc.mytrainer.menus.treinos.TreinosFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -119,8 +117,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.navbar_treinos) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new TreinosFragment()).commit();
         } else if (id == R.id.navbar_alunos) {
-            //getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new AlunosFragment()).commit();
-            startActivity(new Intent(this, Teste.class));
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new AlunosFragment()).commit();
+//            getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new AlunosFragment()).commit();
+//            startActivity(new Intent(this, Teste.class));
         } else if (id == R.id.navbar_mensagens) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new MensagensFragment()).commit();
         } else if (id == R.id.navbar_financeiro_conta) {
