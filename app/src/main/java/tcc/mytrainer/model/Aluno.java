@@ -14,6 +14,8 @@ public class Aluno {
     private String email;
     private String fotoUrl;
     private HashMap<String, String> idCobrancas;
+    private HashMap<String, String> idTreinos;
+    private HashMap<String, String> idTreinadores;
 
     public Aluno() {
     }
@@ -56,5 +58,21 @@ public class Aluno {
 
     public void setIdCobrancas(HashMap<String, String> idCobrancas) {
         this.idCobrancas = idCobrancas;
+    }
+
+    public HashMap<String, String> getIdTreinos() {
+        return idTreinos;
+    }
+
+    public void setIdTreinos(HashMap<String, String> idTreinos) {
+        this.idTreinos = idTreinos;
+    }
+
+    public HashMap<String, String> getIdTreinadores() {
+        return idTreinadores;
+    }
+
+    public void setIdTreinadores(HashMap<String, String> idTreinadores) {
+        this.idTreinadores = idTreinadores;
     }
 }

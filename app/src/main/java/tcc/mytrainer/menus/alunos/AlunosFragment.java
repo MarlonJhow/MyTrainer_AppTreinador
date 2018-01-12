@@ -69,6 +69,8 @@ public class AlunosFragment extends Fragment implements AlunoAdapter.OnItemClick
 
     @Override
     public void onItemClick(String idAluno) {
-
+        Intent intent = new Intent(context, InfoAlunoActivity.class);
+        intent.putExtra("ID_ALUNO", idAluno);
+        startActivity(intent);
     }
 }

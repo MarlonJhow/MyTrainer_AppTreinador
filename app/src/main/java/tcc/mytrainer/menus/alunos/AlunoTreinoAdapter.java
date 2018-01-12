@@ -1,4 +1,4 @@
-package tcc.mytrainer.menus.treinos;
+package tcc.mytrainer.menus.alunos;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,32 +12,33 @@ import java.util.Map;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
+import tcc.mytrainer.menus.treinos.TreinoHolder;
 import tcc.mytrainer.model.Treino;
 
 /**
- * Created by Marlon on 03/08/2017.
+ * Created by Marlon on 12/01/2018.
  */
 
-public class TreinoAdapter extends RecyclerView.Adapter {
+public class AlunoTreinoAdapter extends RecyclerView.Adapter {
 
-    public List<Treino> treinos;
-    private Context context;
-    private OnItemClickListener mOnItemClickListener;
+public List<Treino> treinos;
+private Context context;
+private OnItemClickListener mOnItemClickListener;
 
-    public interface OnItemClickListener{
-        void onItemClick(View view, int position);
-    }
+public interface OnItemClickListener{
+    void onItemClick(View view, int position);
+}
 
-    public TreinoAdapter(Map<String, Treino> treinos, Context context, OnItemClickListener mOnItemClickListener) {
+    public AlunoTreinoAdapter(Map<String, Treino> treinos, Context context, AlunoTreinoAdapter.OnItemClickListener mOnItemClickListener) {
         this.treinos = new ArrayList<Treino>(treinos.values());
         this.context = context;
-        this.mOnItemClickListener= mOnItemClickListener;
+        this.mOnItemClickListener= (OnItemClickListener) mOnItemClickListener;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.treino_item_card, parent, false);
+                .inflate(R.layout.alunos_treino_item_card, parent, false);
         TreinoHolder holder = new TreinoHolder(view);
 
         return holder;

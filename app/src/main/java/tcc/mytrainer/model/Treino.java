@@ -10,12 +10,10 @@ import tcc.mytrainer.enums.ImageTreino;
 
 public class Treino {
     private String id;
-    private String idTreinador;
     private String nome;
     private String descricao;
     private ImageTreino imageTreino;
     private HashMap<String, Atividade> atividades = new HashMap<>();
-    private HashMap<String, String> idAlunos = new HashMap<>();
 
     public Treino() {
     }
@@ -44,14 +42,6 @@ public class Treino {
         this.descricao = descricao;
     }
 
-    public HashMap<String, String> getAlunos() {
-        return idAlunos;
-    }
-
-    public void setAlunos(HashMap<String, String> alunos) {
-        this.idAlunos = alunos;
-    }
-
     public HashMap<String, Atividade> getAtividades() {
         return atividades;
     }
@@ -69,11 +59,4 @@ public class Treino {
         this.imageTreino = imageTreino;
     }
 
-    public String getIdTreinador() {
-        return idTreinador;
-    }
-
-    public void setIdTreinador(String idTreinador) {
-        this.idTreinador = idTreinador;
-    }
 }

@@ -1,5 +1,8 @@
 package tcc.mytrainer.database;
 
+import android.support.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +26,7 @@ import tcc.mytrainer.util.StringUtil;
 
 public class Session {
 
-    public interface FinishLoad{
+    public interface FinishLoad {
         void callback();
     }
 
@@ -60,9 +63,12 @@ public class Session {
                 bindCobrancas();
                 bindTreinos();
 
-                if(firstTime){
+                if (firstTime) {
                     firstTime = false;
-                    try { Thread.sleep (1000); } catch (InterruptedException ex) {}
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                    }
                     finishLoad.callback();
                 }
             }
@@ -76,7 +82,7 @@ public class Session {
     }
 
     private static void bindTreinos() {
-        if(treinador != null){
+        if (treinador != null) {
             for (String idTreino : treinador.getIdTreinos().values()) {
                 mDatabase.child("Treino").child(idTreino).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -95,7 +101,7 @@ public class Session {
     }
 
     private static void bindAlunos() {
-        if(treinador != null){
+        if (treinador != null) {
             for (String idAluno : treinador.getIdAlunos().values()) {
                 mDatabase.child("Aluno").child(idAluno).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -113,8 +119,8 @@ public class Session {
         }
     }
 
-    private static void bindCobrancas(){
-        if(treinador != null){
+    private static void bindCobrancas() {
+        if (treinador != null) {
             for (String idCobranca : treinador.getIdCobrancas().values()) {
                 mDatabase.child("Cobranca").child(idCobranca).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -150,6 +156,24 @@ public class Session {
 
             }
         });
+        return tcs.getTask();
+    }
+
+    public static Task getTreino(final String idTreino) {
+        final TaskCompletionSource<Treino> tcs = new TaskCompletionSource<>();
+        mDatabase.child("Treino").child(idTreino).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Treino treino = dataSnapshot.getValue(Treino.class);
+                tcs.setResult(treino);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         return tcs.getTask();
     }
 

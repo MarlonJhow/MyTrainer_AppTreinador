@@ -15,8 +15,8 @@ public class AlunoFacade {
         Treinador treinador = Session.treinador;
 
         //UPDATE TREINADOR FK COBRANCA
-        Session.mDatabase.child("Treinador").child("idAlunos").child(aluno.getId()).setValue(aluno.getId());
-        Session.mDatabase.child("Aluno").child("idTreinadores").child(treinador.getId()).setValue(treinador.getId());
+        Session.mDatabase.child("Treinador").child(treinador.getId()).child("idAlunos").child(aluno.getId()).setValue(aluno.getId());
+        Session.mDatabase.child("Aluno").child(aluno.getId()).child("idTreinadores").child(treinador.getId()).setValue(treinador.getId());
     }
 
 }
