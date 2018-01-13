@@ -19,6 +19,7 @@ import tcc.mytrainer.database.Session;
 public class SplashScreenActivity extends AppCompatActivity {
 
     private Activity self;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         self = this;
 //        Session.mAuth.signOut();
         FirebaseApp.initializeApp(this);
-        FirebaseUser user = Session.mAuth.getCurrentUser();
+        user = Session.mAuth.getCurrentUser();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         if (user == null) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
@@ -41,6 +47,4 @@ public class SplashScreenActivity extends AppCompatActivity {
             });
         }
     }
-
-
 }

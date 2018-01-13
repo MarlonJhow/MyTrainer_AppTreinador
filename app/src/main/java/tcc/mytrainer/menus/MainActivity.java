@@ -1,5 +1,6 @@
 package tcc.mytrainer.menus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -121,6 +122,10 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new ContaFragment()).commit();
         } else if (id == R.id.navbar_financeiro_cobranca) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new CobrancaFragment()).commit();
+        } else if (id == R.id.navbar_sair) {
+            Session.mAuth.signOut();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -212,7 +212,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             if (!task.isSuccessful()) {
                                 createUser(email, password);
                             } else {
-                                finish();
+                                Session.initEntitys(new Session.FinishLoad() {
+                                    @Override
+                                    public void callback() {
+                                        self.startActivity(new Intent(self, MainActivity.class));
+                                        finish();
+                                    }
+                                });
                             }
                         }
                     });

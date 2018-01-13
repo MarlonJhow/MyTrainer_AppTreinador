@@ -33,5 +33,13 @@
                 android:title="Conta PagSeguro" />
         </menu>
     </item>
+    <item android:title="Outros">
+        <menu>
+            <item
+                android:id="@+id/navbar_sair"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
+                android:title="Sair" />
+        </menu>
+    </item>
 
 </menu>
