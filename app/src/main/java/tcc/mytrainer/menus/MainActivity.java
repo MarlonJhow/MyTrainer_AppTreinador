@@ -18,7 +18,6 @@ import tcc.mytrainer.menus.alunos.AlunosFragment;
 import tcc.mytrainer.menus.cobranca.CobrancaFragment;
 import tcc.mytrainer.menus.conta.ContaFragment;
 import tcc.mytrainer.menus.inicio.InicioFragment;
-import tcc.mytrainer.menus.mensagens.MensagensFragment;
 import tcc.mytrainer.menus.treinos.TreinosFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -118,10 +117,6 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new TreinosFragment()).commit();
         } else if (id == R.id.navbar_alunos) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new AlunosFragment()).commit();
-//            getFragmentManager().beginTransaction().replace(R.id.frame_fragment, new AlunosFragment()).commit();
-//            startActivity(new Intent(this, Teste.class));
-        } else if (id == R.id.navbar_mensagens) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new MensagensFragment()).commit();
         } else if (id == R.id.navbar_financeiro_conta) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragment, new ContaFragment()).commit();
         } else if (id == R.id.navbar_financeiro_cobranca) {

@@ -13,9 +13,9 @@ public class Aluno {
     private String nome;
     private String email;
     private String fotoUrl;
-    private HashMap<String, String> idCobrancas;
-    private HashMap<String, String> idTreinos;
-    private HashMap<String, String> idTreinadores;
+    private HashMap<String, String> idCobrancas = new HashMap<>();
+    private HashMap<String, String> idTreinos = new HashMap<>();
+    private HashMap<String, String> idTreinadores = new HashMap<>();
 
     public Aluno() {
     }

@@ -1,11 +1,9 @@
 package tcc.mytrainer.menus.alunos;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +19,6 @@ import com.squareup.picasso.Picasso;
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
 import tcc.mytrainer.facade.AlunoFacade;
-import tcc.mytrainer.menus.cobranca.ListAlunosDialog;
 import tcc.mytrainer.model.Aluno;
 import tcc.mytrainer.util.StringUtil;
 
@@ -85,7 +82,7 @@ public class AlunosBuscaActivity extends AppCompatActivity {
             Toast.makeText(context, "Nenhum aluno selecionado", Toast.LENGTH_LONG).show();
         } else {
             Session.alunos.put(aluno.getId(), aluno);
-            AlunoFacade.saveOrUpdate(aluno);
+            AlunoFacade.vincularAluno(aluno);
             finish();
         }
     }

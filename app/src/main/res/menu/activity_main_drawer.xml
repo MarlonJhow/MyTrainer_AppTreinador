@@ -18,10 +18,6 @@
                 android:id="@+id/navbar_alunos"
                 android:icon="@drawable/ic_aluno"
                 android:title="Alunos" />
-            <item
-                android:id="@+id/navbar_mensagens"
-                android:icon="@drawable/ic_mensagem"
-                android:title="Mensagens" />
         </menu>
     </item>
 
@@ -31,10 +27,6 @@
                 android:id="@+id/navbar_financeiro_cobranca"
                 android:icon="@drawable/ic_financeiro"
                 android:title="Cobranças" />
-            <item
-                android:id="@+id/navbar_financeiro_pagamento"
-                android:icon="@drawable/ic_assessment_black_24dp"
-                android:title="Pagamentos" />
             <item
                 android:id="@+id/navbar_financeiro_conta"
                 android:icon="@drawable/ic_account_balance_wallet_black_24dp"

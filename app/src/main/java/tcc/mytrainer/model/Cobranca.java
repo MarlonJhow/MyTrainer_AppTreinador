@@ -24,7 +24,7 @@ public class Cobranca {
     private String idAluno;
     private String idTreinador;
     private Periodo periodo;
-    private Status status;
+    private Status status = Status.PENDENTE;
     private Date vencimento;
     private Double valor;
 

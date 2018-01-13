@@ -1,4 +1,4 @@
-package tcc.mytrainer.menus.cobranca;
+package tcc.mytrainer.menus.alunos;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,25 +10,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import java.util.ArrayList;
-
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
-import tcc.mytrainer.dto.AlunoDTO;
-import tcc.mytrainer.model.Aluno;
 
 /**
- * Created by Marlon on 07/09/2017.
+ * Created by Marlon on 12/01/2018.
  */
 
-public class ListAlunosDialog extends DialogFragment implements AlunoAdapter.OnItemClickListener{
+public class ListTreinosDialog extends DialogFragment implements AlunoTreinoAdapterAdd.OnItemClickListener{
 
     View view;
-    AlunoAdapter alunoAdapter;
-    ListAlunosDialog.ListAlunosDialogListener mListener;
+    AlunoTreinoAdapterAdd treinoAdapter;
+    Listener mListener;
 
-    public interface ListAlunosDialogListener {
-        public void getAlunoId(String idAluno);
+    public interface Listener {
+        public void callbackModal(String idAluno);
     }
 
     @Override
@@ -40,8 +36,8 @@ public class ListAlunosDialog extends DialogFragment implements AlunoAdapter.OnI
         //INIT RECYCLERVIEW
         RecyclerView rvView = (RecyclerView) view.findViewById(R.id.alunosRecyclerView);
 
-        alunoAdapter = new AlunoAdapter(AlunoDTO.toList(new ArrayList<Aluno>(Session.alunos.values())), getActivity(), this);
-        rvView.setAdapter(alunoAdapter);
+        treinoAdapter = new AlunoTreinoAdapterAdd(Session.treinos, getActivity(), this);
+        rvView.setAdapter(treinoAdapter);
         RecyclerView.LayoutManager layout = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
         rvView.setLayoutManager(layout);
@@ -51,8 +47,8 @@ public class ListAlunosDialog extends DialogFragment implements AlunoAdapter.OnI
     }
 
     @Override
-    public void onItemClick(String idAluno) {
-        mListener.getAlunoId(idAluno);
+    public void onItemClick(String id) {
+        mListener.callbackModal(id);
         dismiss();
     }
 
@@ -62,11 +58,12 @@ public class ListAlunosDialog extends DialogFragment implements AlunoAdapter.OnI
         // Verify that the host activity implements the callbackRecyclerViewButton interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
-            mListener = (ListAlunosDialog.ListAlunosDialogListener) activity;
+            mListener = (Listener) activity;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
                     + " must implement NoticeDialogListener");
         }
     }
+
 }

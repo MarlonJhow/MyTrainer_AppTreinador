@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import tcc.mytrainer.R;
+import tcc.mytrainer.database.Session;
 import tcc.mytrainer.menus.treinos.TreinoHolder;
 import tcc.mytrainer.model.Treino;
 
@@ -18,17 +19,17 @@ import tcc.mytrainer.model.Treino;
  * Created by Marlon on 12/01/2018.
  */
 
-public class AlunoTreinoAdapter extends RecyclerView.Adapter {
+public class AlunoTreinoAdapterAdd  extends RecyclerView.Adapter {
 
-    public List<Treino> treinos = new ArrayList<>();
+    public List<Treino> treinos;
     private Context context;
-    private OnItemClickListener mOnItemClickListener;
+    private AlunoTreinoAdapterAdd.OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
-        void callbackRecyclerViewButton(String id);
+        void onItemClick(String id);
     }
 
-    public AlunoTreinoAdapter(Map<String, Treino> treinos, Context context, AlunoTreinoAdapter.OnItemClickListener mOnItemClickListener) {
+    public AlunoTreinoAdapterAdd(Map<String, Treino> treinos, Context context, AlunoTreinoAdapterAdd.OnItemClickListener mOnItemClickListener) {
         this.treinos = new ArrayList<Treino>(treinos.values());
         this.context = context;
         this.mOnItemClickListener = mOnItemClickListener;
@@ -37,7 +38,7 @@ public class AlunoTreinoAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.alunos_treino_item_card, parent, false);
+                .inflate(R.layout.alunos_treino_item_card_add, parent, false);
         TreinoHolder holder = new TreinoHolder(view);
 
         return holder;
@@ -55,7 +56,7 @@ public class AlunoTreinoAdapter extends RecyclerView.Adapter {
         treinoHolder.getButtonEdit().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickListener.callbackRecyclerViewButton(treino.getId());
+                mOnItemClickListener.onItemClick(treino.getId());
             }
         });
     }
@@ -65,7 +66,7 @@ public class AlunoTreinoAdapter extends RecyclerView.Adapter {
         return treinos.size();
     }
 
-    public void update(List<Treino> list) {
-        treinos = list;
+    public void update() {
+        treinos = new ArrayList<Treino>(Session.treinos.values());
     }
 }

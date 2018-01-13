@@ -61,24 +61,23 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:weightSum="1">
 
                         <EditText
                             android:id="@+id/textBuscaAluno"
-                            android:layout_width="306dp"
+                            android:layout_width="290dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.12"
                             android:ems="10"
                             android:hint="E-mail do aluno"
                             android:inputType="textPersonName" />
 
                         <ImageView
                             android:id="@+id/CobrancaCadastroImgSearch"
-                            android:layout_width="60dp"
-                            android:layout_height="match_parent"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_weight="0.12"
                             app:srcCompat="@drawable/ic_search_black_24dp" />
 

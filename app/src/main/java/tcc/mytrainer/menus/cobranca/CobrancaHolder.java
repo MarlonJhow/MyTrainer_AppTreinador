@@ -45,7 +45,7 @@ class CobrancaHolder extends RecyclerView.ViewHolder {
 
         Picasso.with(context).load(cobranca.getFotoAlunoUrl()).into(fotoAluno);
         nomeAluno.setText(cobranca.getNomeAluno());
-        valor.setText(cobranca.getValor().toString());
+        valor.setText("R$ "+String.format("%.2f", cobranca.getValor()));
         status.setText(cobranca.getStatus().toString());
         vencimento.setText(new SimpleDateFormat("dd/MM/yyyy").format(cobranca.getVencimento()));
         if (cobranca.getPeriodo().equals(Periodo.MENSAL)) {

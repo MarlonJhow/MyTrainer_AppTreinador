@@ -88,7 +88,9 @@ public class Session {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Treino treino = dataSnapshot.getValue(Treino.class);
-                        treinos.put(treino.getId(), treino);
+                        if (treinador.getIdTreinos().containsKey(treino.getId())) {
+                            treinos.put(treino.getId(), treino);
+                        }
                     }
 
                     @Override
@@ -107,7 +109,9 @@ public class Session {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Aluno aluno = dataSnapshot.getValue(Aluno.class);
-                        alunos.put(aluno.getId(), aluno);
+                        if (treinador.getIdAlunos().containsKey(aluno.getId())) {
+                            alunos.put(aluno.getId(), aluno);
+                        }
                     }
 
                     @Override
@@ -126,7 +130,9 @@ public class Session {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Cobranca cobranca = dataSnapshot.getValue(Cobranca.class);
-                        cobrancas.put(cobranca.getId(), cobranca);
+                        if (treinador.getIdCobrancas().containsKey(cobranca.getId())) {
+                            cobrancas.put(cobranca.getId(), cobranca);
+                        }
                     }
 
                     @Override

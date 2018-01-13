@@ -74,7 +74,7 @@ public class DialogCadastroTreino extends DialogFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        // Verify that the host activity implements the callback interface
+        // Verify that the host activity implements the callbackRecyclerViewButton interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
             mListener = (CadastroTreinoDialogListener) activity;
