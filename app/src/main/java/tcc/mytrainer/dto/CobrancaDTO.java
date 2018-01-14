@@ -15,7 +15,7 @@ import tcc.mytrainer.model.Cobranca;
  */
 
 public class CobrancaDTO {
-
+    private String id;
     private String fotoAlunoUrl;
     private String nomeAluno;
     private Double valor;
@@ -27,6 +27,7 @@ public class CobrancaDTO {
     }
 
     public CobrancaDTO(Cobranca cobranca) {
+        this.id = cobranca.getId();
         this.fotoAlunoUrl = Session.alunos.get(cobranca.getIdAluno()).getFotoUrl();
         this.nomeAluno = Session.alunos.get(cobranca.getIdAluno()).getNome();
         this.valor = cobranca.getValor();
@@ -91,5 +92,13 @@ public class CobrancaDTO {
 
     public void setFotoAlunoUrl(String fotoAlunoUrl) {
         this.fotoAlunoUrl = fotoAlunoUrl;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

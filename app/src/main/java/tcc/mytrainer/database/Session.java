@@ -130,7 +130,7 @@ public class Session {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Cobranca cobranca = dataSnapshot.getValue(Cobranca.class);
-                        if (treinador.getIdCobrancas().containsKey(cobranca.getId())) {
+                        if (cobranca != null && treinador.getIdCobrancas().containsKey(cobranca.getId())) {
                             cobrancas.put(cobranca.getId(), cobranca);
                         }
                     }

@@ -22,10 +22,17 @@ class CobrancaAdapter extends RecyclerView.Adapter{
 
     private List<CobrancaDTO> cobrancas;
     private Context context;
+    private Listener listener;
 
-    public CobrancaAdapter(HashMap<String, Cobranca> cobrancas, Context context) {
+    public interface Listener{
+        void callback(String cobrancaId);
+    }
+
+
+    public CobrancaAdapter(HashMap<String, Cobranca> cobrancas, Context context, Listener listener) {
         this.cobrancas = CobrancaDTO.toList(cobrancas);
         this.context = context;
+        this.listener = listener;
     }
 
     @Override
@@ -40,8 +47,13 @@ class CobrancaAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         CobrancaHolder cobrancaHolder = (CobrancaHolder) holder;
         CobrancaDTO cobranca = cobrancas.get(position);
-
         cobrancaHolder.update(cobranca, context);
+        cobrancaHolder.getButtonEdit().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.callback(cobranca.getId());
+            }
+        });
     }
 
     @Override

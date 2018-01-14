@@ -31,4 +31,17 @@ public class CobrancaFacade {
         Session.cobrancas.put(cobranca.getId(), cobranca);
         Session.mDatabase.child("Cobranca").child(cobranca.getId()).setValue(cobranca);
     }
+
+    public static void delete(String cobrancaId) {
+        Cobranca cobranca = Session.cobrancas.get(cobrancaId);
+
+        Session.cobrancas.remove(cobrancaId);
+        Session.mDatabase.child("Cobranca").child(cobrancaId).removeValue();
+
+        Session.alunos.get(cobranca.getIdAluno()).getIdCobrancas().remove(cobrancaId);
+        Session.mDatabase.child("Aluno").child(cobranca.getIdAluno()).child("idCobrancas").child(cobrancaId).removeValue();
+
+        Session.treinador.getIdCobrancas().remove(cobrancaId);
+        Session.mDatabase.child("Treinador").child(cobranca.getIdTreinador()).child("idCobrancas").child(cobrancaId).removeValue();
+    }
 }

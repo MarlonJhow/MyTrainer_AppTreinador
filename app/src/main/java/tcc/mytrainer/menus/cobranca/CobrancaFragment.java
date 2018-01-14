@@ -14,12 +14,13 @@ import android.view.ViewGroup;
 
 import tcc.mytrainer.R;
 import tcc.mytrainer.database.Session;
+import tcc.mytrainer.facade.CobrancaFacade;
 
 /**
  * Created by Marlon on 15/09/2017.
  */
 
-public class CobrancaFragment extends Fragment {
+public class CobrancaFragment extends Fragment implements CobrancaAdapter.Listener{
 
     private View view;
     private Context context;
@@ -52,7 +53,7 @@ public class CobrancaFragment extends Fragment {
 
         //REYCLER VIEW
         recyclerView = (RecyclerView) view.findViewById(R.id.cobranca_recyclerview);
-        cobrancaAdapter = new CobrancaAdapter(Session.cobrancas, getActivity());
+        cobrancaAdapter = new CobrancaAdapter(Session.cobrancas, getActivity(), this);
         recyclerView.setAdapter(cobrancaAdapter);
         RecyclerView.LayoutManager layout = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
@@ -64,6 +65,14 @@ public class CobrancaFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        cobrancaAdapter.update();
+        cobrancaAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void callback(String cobrancaId) {
+        CobrancaFacade.delete(cobrancaId);
+
         cobrancaAdapter.update();
         cobrancaAdapter.notifyDataSetChanged();
     }
