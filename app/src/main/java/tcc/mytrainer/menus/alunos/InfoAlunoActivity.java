@@ -135,6 +135,11 @@ public class InfoAlunoActivity extends AppCompatActivity implements AlunoTreinoA
                 TreinadorFacade.saveOrUpdate(Session.treinador);
 
                 aluno.getIdTreinadores().remove(Session.treinador.getId());
+                for(String idTreino : aluno.getIdTreinos().values()){
+                    if(Session.treinador.getIdTreinos().containsKey(idTreino)){
+                        aluno.getIdTreinos().remove(idTreino);
+                    }
+                }
                 AlunoFacade.saveOrUpdate(aluno);
                 Session.alunos.remove(aluno.getId());
                 finish();
