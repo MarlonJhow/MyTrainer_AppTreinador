@@ -161,11 +161,13 @@ public class CadastroCobrancaActivity extends AppCompatActivity implements ListA
     @Override
     public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
         mes++;  //ESSE LAZARENTO COMEÇA EM 0
+        String mesStr = mes < 10 ? "0"+mes : String.valueOf(mes);
 
-        txtVencimento.setText("" + dia + "/" + mes + "/" + ano);
+        String data = "" + dia + "/" + mesStr + "/" + ano;
+        txtVencimento.setText(data);
 
         try {
-            vencimento = new SimpleDateFormat("yyyyMMdd").parse("" + ano + mes + ano);
+            vencimento = new SimpleDateFormat("dd/MM/yyyy").parse(data);
         } catch (ParseException e) {
             e.printStackTrace();
         }
