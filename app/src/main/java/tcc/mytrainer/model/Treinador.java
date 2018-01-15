@@ -9,6 +9,8 @@ import java.util.HashMap;
 public class Treinador {
 
     private String id;
+    private String nome;
+    private String fotoUrl;
     private String email;
     private ContaPagSeguro contaPagSeguro;
     private HashMap<String, String> idTreinos = new HashMap<String, String>();
@@ -69,5 +71,21 @@ public class Treinador {
 
     public void setIdTreinos(HashMap<String, String> idTreinos) {
         this.idTreinos = idTreinos;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
+
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
     }
 }
